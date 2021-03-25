@@ -1,0 +1,14 @@
+D:\VS Projects\Test\Blog\Blog.Application.Services\bin\Debug\netcoreapp3.1\Blog.Application.Services.deps.json
+D:\VS Projects\Test\Blog\Blog.Application.Services\bin\Debug\netcoreapp3.1\Blog.Application.Services.dll
+D:\VS Projects\Test\Blog\Blog.Application.Services\bin\Debug\netcoreapp3.1\Blog.Application.Services.pdb
+D:\VS Projects\Test\Blog\Blog.Application.Services\bin\Debug\netcoreapp3.1\Blog.Core.dll
+D:\VS Projects\Test\Blog\Blog.Application.Services\bin\Debug\netcoreapp3.1\Blog.Core.Shared.dll
+D:\VS Projects\Test\Blog\Blog.Application.Services\bin\Debug\netcoreapp3.1\Blog.Core.pdb
+D:\VS Projects\Test\Blog\Blog.Application.Services\bin\Debug\netcoreapp3.1\Blog.Core.Shared.pdb
+D:\VS Projects\Test\Blog\Blog.Application.Services\obj\Debug\netcoreapp3.1\Blog.Application.Services.csprojAssemblyReference.cache
+D:\VS Projects\Test\Blog\Blog.Application.Services\obj\Debug\netcoreapp3.1\Blog.Application.Services.AssemblyInfoInputs.cache
+D:\VS Projects\Test\Blog\Blog.Application.Services\obj\Debug\netcoreapp3.1\Blog.Application.Services.AssemblyInfo.cs
+D:\VS Projects\Test\Blog\Blog.Application.Services\obj\Debug\netcoreapp3.1\Blog.Application.Services.csproj.CoreCompileInputs.cache
+D:\VS Projects\Test\Blog\Blog.Application.Services\obj\Debug\netcoreapp3.1\Blog.Application.Services.csproj.CopyComplete
+D:\VS Projects\Test\Blog\Blog.Application.Services\obj\Debug\netcoreapp3.1\Blog.Application.Services.dll
+D:\VS Projects\Test\Blog\Blog.Application.Services\obj\Debug\netcoreapp3.1\Blog.Application.Services.pdb

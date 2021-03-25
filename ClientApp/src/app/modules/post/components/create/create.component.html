@@ -1,0 +1,23 @@
+<div class="row mt-4">
+	<div class="col md-3">
+		<form [formGroup]="postSrv.createNewFormModel" autocomplete="off">
+			<div class="form-group col-md-8 offset-md-2 required">
+				<label>Название поста</label>
+				<input class="form-control" formControlName="PostName">
+				<label class="text-danger"
+					*ngIf="postSrv.createNewFormModel.get('PostName')?.touched && postSrv.createNewFormModel.get('PostName')?.errors?.required">Поле
+					обязательно для заполнения</label>
+				<label class="text-danger" *ngIf="postSrv.createNewFormModel.get('PostName')?.errors?.minlength">Минимум 10
+					символов</label>
+			</div>
+			<div class="form-group mt-4 col-md-8 offset-md-2 required">
+				<angular-editor formControlName="PostContent" [config]="editorConfig"></angular-editor>
+				<label class="text-danger"
+					*ngIf="postSrv.createNewFormModel.get('PostContent')?.touched && postSrv.createNewFormModel.get('PostContent')?.errors?.required">Поле
+					обязательно для заполнения</label>
+				<label class="text-danger" *ngIf="postSrv.createNewFormModel.get('PostContent')?.errors?.minlength">Минимум 100
+					символов</label>
+			</div>
+		</form>
+	</div>
+</div>

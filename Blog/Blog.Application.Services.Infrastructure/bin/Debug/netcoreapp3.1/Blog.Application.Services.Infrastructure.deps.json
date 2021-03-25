@@ -1,0 +1,62 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Blog.Application.Services.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Blog.Application.Services": "1.0.0"
+        },
+        "runtime": {
+          "Blog.Application.Services.Infrastructure.dll": {}
+        }
+      },
+      "Blog.Application.Services/1.0.0": {
+        "dependencies": {
+          "Blog.Core": "1.0.0"
+        },
+        "runtime": {
+          "Blog.Application.Services.dll": {}
+        }
+      },
+      "Blog.Core/1.0.0": {
+        "dependencies": {
+          "Blog.Core.Shared": "1.0.0"
+        },
+        "runtime": {
+          "Blog.Core.dll": {}
+        }
+      },
+      "Blog.Core.Shared/1.0.0": {
+        "runtime": {
+          "Blog.Core.Shared.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Blog.Application.Services.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Blog.Application.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Blog.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Blog.Core.Shared/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
