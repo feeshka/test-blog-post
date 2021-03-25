@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { BlogCreate } from 'src/app/core/classes/blog/blogCreate';
+import { BlogEdit } from 'src/app/core/classes/blog/blogEdit';
+import { BlogService } from 'src/app/services/blog.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -7,9 +12,50 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+  private _editing: boolean = false;
+
+  get edit(){return this._editing}
+
+  constructor(private _fb: FormBuilder, private _blogSrv: BlogService, private _location: Location) { }
 
   ngOnInit(): void {
   }
 
+  createNewFormModel = this._fb.group({
+    BlogName: ['', [Validators.required, Validators.minLength(10)]],
+    BlogComment: ['', [Validators.required, Validators.minLength(30)]],
+    BlogImage: []
+  });
+
+  onSubmit(){
+    console.log(11);
+    this._editing ? this.editBlog() : this.createNewBlog();
+  }
+
+  editBlog(){
+    let editItem: BlogEdit = {
+      BlogName: this.createNewFormModel.value.BlogName,
+      BlogComment: this.createNewFormModel.value.BlogComment,
+      BlogId: 0,//TODO
+      UserId: ''
+    };
+
+    this._blogSrv.updateBlog(editItem);
+  }
+
+  createNewBlog(){
+
+    let newBlog: BlogCreate = {
+      BlogName: this.createNewFormModel.value.BlogName,
+      BlogComment: this.createNewFormModel.value.BlogComment,
+      UserId: ''
+    };
+
+    this._blogSrv.createNewBlog(newBlog);
+
+  }
+
+  goBack(){
+    this._location.back();
+  }
 }
