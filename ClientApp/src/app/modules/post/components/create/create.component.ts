@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create',
@@ -9,7 +10,13 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class CreateComponent implements OnInit {
 
-  constructor(public postSrv: PostService) { }
+  constructor(private fb: FormBuilder, public postSrv: PostService) { }
+
+
+  createNewFormModel = this.fb.group({
+    PostName: ['', [Validators.required, Validators.minLength(10)]],
+    PostContent: ['', [Validators.required, Validators.minLength(100)]],
+  });
 
   ngOnInit(): void {
   }

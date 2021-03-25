@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 import { UserService } from './services/user.service';
 import { AppSettings } from './apsettings';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { HttpClient } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClient
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

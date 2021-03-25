@@ -1,1 +1,32 @@
-<p>create works!</p>
+<div class="row mt-4">
+	<div class="col md-3">
+		<form [formGroup]="createNewFormModel" autocomplete="off" (ngSubmit)=(onSubmit())>
+			<div class="form-group col-md-8 offset-md-2 required">
+				<label>Как Ваш блог будет называться?</label>
+				<input class="form-control" formControlName="BlogName">
+				<label class="text-danger"
+					*ngIf="createNewFormModel.get('BlogName')?.touched && createNewFormModel.get('BlogName')?.errors?.required">Поле
+					обязательно для заполнения</label>
+				<label class="text-danger" *ngIf="createNewFormModel.get('BlogName')?.errors?.minlength">Минимум 10
+					символов</label>
+			</div>
+			<div class="form-group mt-4 col-md-8 offset-md-2 required">
+				<label>О чём этот блог?</label>
+				<textarea class="form-control" formControlName="BlogComment"></textarea>
+				<label class="text-danger"
+					*ngIf="createNewFormModel.get('BlogComment')?.touched && createNewFormModel.get('BlogComment')?.errors?.required">Поле
+					обязательно для заполнения</label>
+				<label class="text-danger" *ngIf="createNewFormModel.get('BlogComment')?.errors?.minlength">Минимум 30
+					символов</label>
+			</div>
+			<div class="form-row mt-4">
+				<div class="form-group col-md-8 offset-md-2">
+					<button *ngIf="edit" type="submit" class="btn btn-primary m-1" [disabled]=(!createNewFormModel.valid)>Создать</button>
+					<button *ngIf="!edit" type="submit" class="btn btn-primary m-1" [disabled]=(!createNewFormModel.valid)>Редактировать</button>
+					<button type="reset" class="btn btn-danger m-1">Очистить</button>
+					<button (click)="(goBack())" class="btn btn-secondary m-1">Отмена</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

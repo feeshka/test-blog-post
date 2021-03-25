@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from './components/blog/blog.component';
+import { CreateComponent } from './components/create/create.component';
 import { ListComponent } from './components/list/list.component';
 
 const routes: Routes = 
 [
   { path: '', component: ListComponent },
-  { path: ':id', component: BlogComponent },
-  { path: ':id/posts', loadChildren: () => import('../post/post.module').then(m => m.PostModule) },
+  { path: 'new', component: CreateComponent },
+  { path: 'view/:id', component: BlogComponent },
+  { path: 'view/:id/posts', loadChildren: () => import('../post/post.module').then(m => m.PostModule) },
   
 ];
 
