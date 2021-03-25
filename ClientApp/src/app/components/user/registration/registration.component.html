@@ -9,7 +9,7 @@
             <div class="form-group col-md-8 offset-md-2 required">
                 <label>Email</label>
                 <input class="form-control" formControlName="Email">
-                <label class="text-danger" *ngIf="userSrv.regFormModel.get('Email')?.touched && userSrv.regFormModel.get('Email')?.errors?.email">Введите корректный Email</label>
+                <label class="text-danger" *ngIf="userSrv.regFormModel.get('Email')?.touched && (userSrv.regFormModel.get('Email')?.errors?.email || userSrv.regFormModel.get('Email')?.errors?.required)">Введите корректный Email</label>
             </div>
             <div formGroupName="Passwords">
                 <div class="form-group col-md-8 offset-md-2 required">

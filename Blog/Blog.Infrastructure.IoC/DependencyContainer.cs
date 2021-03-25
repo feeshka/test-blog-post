@@ -13,6 +13,10 @@ namespace Blog.Infrastructure.IoC
 		{
 			services.AddScoped<IBlogDalFacade, BlogDalFacade>();
 			services.AddScoped<IBlogService, BlogService>();
+			services.AddScoped<IUserAuthService, UserAuthService>();
+			services.AddScoped<IBlogDalFacade, BlogDalFacade>();
+			services.AddScoped<IUserAuthDalFacade, UserAuthDalFacade>();
+
 		}
 	}
 }

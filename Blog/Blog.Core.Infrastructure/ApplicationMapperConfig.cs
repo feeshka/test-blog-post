@@ -34,6 +34,8 @@ namespace Library.Dal.Infrastructure
 			CreateMap<UserDto, User>()
 				.ForMember(e => e.Id, options => options.Ignore())
 				.ForMember(e => e.PasswordHash, options => options.MapFrom(x => x.Password));
+			CreateMap<UserSignUpDto, User>()
+				.AfterMap((s, d) => d.CreationDate = DateTime.UtcNow);
 
 			#endregion
 

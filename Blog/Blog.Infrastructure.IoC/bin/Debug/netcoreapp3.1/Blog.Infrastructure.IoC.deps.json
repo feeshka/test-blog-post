@@ -1323,7 +1323,8 @@
       },
       "Blog.Core/1.0.0": {
         "dependencies": {
-          "Blog.Core.Shared": "1.0.0"
+          "Blog.Core.Shared": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.13"
         },
         "runtime": {
           "Blog.Core.dll": {}

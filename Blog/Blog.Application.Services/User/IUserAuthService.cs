@@ -1,4 +1,5 @@
 ﻿using Blog.Core;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Blog.Application.Services
 {
 	public interface IUserAuthService
 	{
-		Task<bool> RegisterAsync (UserSignUpDto userDto);
+		Task<IdentityResult> RegisterAsync (UserSignUpDto userDto);
 		Task LogIn (UserSignInDto userDto);
 
 	}

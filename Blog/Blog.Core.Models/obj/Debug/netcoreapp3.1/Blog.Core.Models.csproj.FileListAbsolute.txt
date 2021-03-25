@@ -6,3 +6,4 @@ D:\VS Projects\Test\Blog\Blog.Core.Models\bin\Debug\netcoreapp3.1\Blog.Core.Mode
 D:\VS Projects\Test\Blog\Blog.Core.Models\bin\Debug\netcoreapp3.1\Blog.Core.Models.pdb
 D:\VS Projects\Test\Blog\Blog.Core.Models\obj\Debug\netcoreapp3.1\Blog.Core.Models.dll
 D:\VS Projects\Test\Blog\Blog.Core.Models\obj\Debug\netcoreapp3.1\Blog.Core.Models.pdb
+D:\VS Projects\Test\Blog\Blog.Core.Models\obj\Debug\netcoreapp3.1\Blog.Core.Models.csprojAssemblyReference.cache

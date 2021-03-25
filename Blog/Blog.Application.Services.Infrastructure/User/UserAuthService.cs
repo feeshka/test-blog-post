@@ -1,4 +1,5 @@
 ﻿using Blog.Core;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,16 +20,25 @@ namespace Blog.Application.Services.Infrastructure
 			throw new NotImplementedException();
 		}
 
-		public async Task<bool> RegisterAsync (UserSignUpDto userDto)
+		public async Task<IdentityResult> RegisterAsync (UserSignUpDto userDto)
 		{
 			try
 			{
+				userDto.PasswordHash = GetPasswordHash(userDto.Password);
+
 				return await _userAuthDalFacade.RegisterAsync(userDto);
 			}
 			catch (Exception ex)
 			{
 				throw new Exception(ex.Message);
 			}
+		}
+
+		private string GetPasswordHash (string password)
+		{
+			byte[] data = Encoding.ASCII.GetBytes(password);
+			data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+			return Encoding.ASCII.GetString(data);
 		}
 	}
 }

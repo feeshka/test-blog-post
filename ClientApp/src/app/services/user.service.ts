@@ -1,18 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AppSettings } from '../apsettings';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private appSettings: AppSettings) { }
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   regFormModel = this.fb.group({
       UserName: ['', Validators.required],
-      Email: ['', Validators.email],
+      Email: ['', [Validators.email, Validators.required]],
       Passwords: this.fb.group({
         Password: ['', [Validators.required, Validators.minLength(8)]],
         ConfirmPassword: ['']
@@ -35,9 +34,8 @@ export class UserService {
     var newUser = {
       UserName: this.regFormModel.value.UserName,
       Email: this.regFormModel.value.Email,
-      Password: this.regFormModel.value.Password
+      Password: this.regFormModel.value.Passwords.Password
     }
-    //this.http.get(this.appSettings.apiUri);
-    console.log(newUser);
+    return this.http.post("https://localhost:44343/api/auth/registration", newUser);
   }
 }
