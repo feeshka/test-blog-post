@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { PostFilter } from 'src/app/core/classes/post/postFilter';
-import { PostInList } from 'src/app/core/classes/post/postInList';
+import { PostFilter } from 'src/app/core/classes/post/post-filter';
+import { PostInList } from 'src/app/core/classes/post/post-in-list';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({

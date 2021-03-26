@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostInList } from 'src/app/core/classes/post/postInList';
+import { PostInList } from 'src/app/core/classes/post/post-in-list';
 import { HomeService } from 'src/app/services/home.service';
 
 @Component({

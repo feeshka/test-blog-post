@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-div.form-group.required>label:first-child::after{
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+iv.form-group.required>label:first-child::after{
     content: "*";
     color: crimson;
     padding-left: 5px;

@@ -10,6 +10,7 @@ import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true
-    })
+    }),
+    NgbModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

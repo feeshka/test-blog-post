@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { BlogCreate } from 'src/app/core/classes/blog/blogCreate';
-import { BlogEdit } from 'src/app/core/classes/blog/blogEdit';
 import { BlogService } from 'src/app/services/blog.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { BlogEdit } from 'src/app/core/classes/blog/blog-edit';
+import { BlogCreate } from 'src/app/core/classes/blog/blog-create';
 
 @Component({
   selector: 'app-create',

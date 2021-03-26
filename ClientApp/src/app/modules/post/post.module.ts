@@ -8,6 +8,7 @@ import { ListComponent } from './components/list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     PostRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ]
 })
 export class PostModule { }
