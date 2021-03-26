@@ -9,6 +9,7 @@ import { RegistrationComponent } from './components/user/registration/registrati
 import { UserService } from './services/user.service';
 import { AppSettings } from './apsettings';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

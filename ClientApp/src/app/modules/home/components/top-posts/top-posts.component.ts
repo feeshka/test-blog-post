@@ -23,6 +23,7 @@ export class TopPostsComponent implements OnInit {
     this._topPosts = [
       {
 	    Id: 0,
+      OwnerUserId: '0000',
       OwnerName: 'OwnerName',
       PostName: 'PostName',
       PostShortComment: 'PostShortComment',
@@ -31,6 +32,7 @@ export class TopPostsComponent implements OnInit {
     },
     {
 	    Id: 1,
+      OwnerUserId: '0000',
       OwnerName: 'OwnerName2',
       PostName: 'PostName2',
       PostShortComment: 'PostShortComment2',

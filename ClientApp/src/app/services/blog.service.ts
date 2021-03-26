@@ -20,6 +20,10 @@ export class BlogService {
 
   }
 
+  getBlogById(blogId: number){
+    
+  }
+
   getAllUserBlogs(userId: string){
 
   }

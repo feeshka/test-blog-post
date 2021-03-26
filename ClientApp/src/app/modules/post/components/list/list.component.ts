@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { PostFilter } from 'src/app/core/classes/post/postFilter';
+import { PostInList } from 'src/app/core/classes/post/postInList';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +11,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  private _posts: PostInList[] = [];
+
+  constructor(private _postSrv: PostService, private _fb:FormBuilder) { }
+
+  get Posts(){return this._posts}
 
   ngOnInit(): void {
+    this.getPosts();
+    
   }
 
+  filterFormModel = this._fb.group({
+    AuthorName: [''],
+    PostName: [''],
+    RatingFrom: [],
+    RatingTo: []
+  });
+
+  getPosts(){
+    let filter: PostFilter = {
+      PostName: this.filterFormModel.value.PostName,
+      RatingFrom: this.filterFormModel.value.RatingFrom,
+      RatingTo: this.filterFormModel.value.RatingTo,
+      DateFrom: '',
+      DateTo: ''
+    }
+    this._posts = [
+      {
+	    Id: 0,
+      OwnerUserId: '0000',
+      OwnerName: 'OwnerName',
+      PostName: 'PostName',
+      PostShortComment: 'PostShortComment',
+      PostCreationDate: '03-01-2020',
+      PostRating: 2,
+    },
+    {
+	    Id: 1,
+      OwnerUserId: '0000',
+      OwnerName: 'OwnerName2',
+      PostName: 'PostName2',
+      PostShortComment: 'PostShortComment2',
+      PostCreationDate: '03-01-2020',
+      PostRating: 2,
+    }]
+    //return this._postSrv.getPosts(filter);
+  }
 }

@@ -1,1 +1,47 @@
-<p>list works!</p>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="row">
+				<form class="form-inline" [formGroup]="filterFormModel" autocomplete="off" (ngSubmit)=(getPosts())>
+					<input type="text" formControlName="PostName" class="form-control m-2 w-auto d-inline-block text-muted" value="Название">
+					<input type="text" formControlName="AuthorName" class="form-control m-2 w-auto d-inline-block text-muted" placeholder="Автор">
+					<label class="m-2">Рейтинг:</label>
+					<select formControlName="RatingFrom" placeholder="От" class="form-control m-2 w-auto d-inline-block text-muted">
+						<option value=""></option>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					  </select>
+					<label>-</label>
+					<select formControlName="RatingTo" placeholder="До" class="form-control m-2 w-auto d-inline-block text-muted">
+						<option value=""></option>
+						<option value="0">0</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					  </select>
+					<div class="form-group d-inline-block m-2">
+						<button type="submit" class="btn btn-danger mb-2 w-auto">Искать</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="card m-2" *ngFor="let post of Posts">
+		<h6 class="card-header text-muted">{{post.OwnerName}}</h6>
+		<div class="card-body">
+			<h5 class="card-title">{{post.PostName}}</h5>
+			<p class="card-text">{{post.PostShortComment}}</p>
+			<a href="{{'post/view/'+ post.Id}}" class="btn btn-info btn-sm w-auto">Читать</a>
+		</div>
+		<div class="card-footer text-muted">
+			<div class="card-text">Дата: {{post.PostCreationDate}}</div>
+			<div class="card-text">Рейтинг: {{post.PostRating}}</div>
+		</div>
+	</div>
+</div>
