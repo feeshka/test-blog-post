@@ -9,7 +9,6 @@ import { RegistrationComponent } from './components/user/registration/registrati
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -24,7 +23,9 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule
+    ToastrModule.forRoot({
+      progressBar: true
+    })
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

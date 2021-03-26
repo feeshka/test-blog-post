@@ -1,33 +1,33 @@
 <div class="row mt-4">
     <div class="col md-3">
-        <form [formGroup]="userSrv.regFormModel" autocomplete="off" (submit)="onSubmit()">
+        <form [formGroup]="regFormModel" autocomplete="off" (submit)="onSubmit()">
             <div class="form-group col-md-8 offset-md-2 required">
                 <label>Имя пользователя</label>
                 <input class="form-control" formControlName="UserName">
-                <label class="text-danger" *ngIf="userSrv.regFormModel.get('UserName')?.touched && userSrv.regFormModel.get('UserName')?.errors?.required">Поле обязательно для заполнения</label>
+                <label class="text-danger" *ngIf="regFormModel.get('UserName')?.touched && regFormModel.get('UserName')?.errors?.required">Поле обязательно для заполнения</label>
             </div>
             <div class="form-group col-md-8 offset-md-2 required">
                 <label>Email</label>
                 <input class="form-control" formControlName="Email">
-                <label class="text-danger" *ngIf="userSrv.regFormModel.get('Email')?.touched && (userSrv.regFormModel.get('Email')?.errors?.email || userSrv.regFormModel.get('Email')?.errors?.required)">Введите корректный Email</label>
+                <label class="text-danger" *ngIf="regFormModel.get('Email')?.touched && (regFormModel.get('Email')?.errors?.email || regFormModel.get('Email')?.errors?.required)">Введите корректный Email</label>
             </div>
             <div formGroupName="Passwords">
                 <div class="form-group col-md-8 offset-md-2 required">
                     <label>Пароль</label>
                     <input type="password" class="form-control" formControlName="Password">
-                <label class="text-danger" *ngIf="userSrv.regFormModel.get('Passwords.Password')?.touched && userSrv.regFormModel.get('Passwords.Password')?.errors?.required">Поле обязательно для заполнения</label>
-                <label class="text-danger" *ngIf="userSrv.regFormModel.get('Passwords.Password')?.errors?.minlength">Минимально 8 символов</label>
+                <label class="text-danger" *ngIf="regFormModel.get('Passwords.Password')?.touched && regFormModel.get('Passwords.Password')?.errors?.required">Поле обязательно для заполнения</label>
+                <label class="text-danger" *ngIf="regFormModel.get('Passwords.Password')?.errors?.minlength">Минимально 8 символов</label>
             </div>
                 <div class="form-group col-md-8 offset-md-2 required">
                     <label>Подтверждение пароля</label>
                     <input type="password" class="form-control" formControlName="ConfirmPassword">
-                <label class="text-danger" *ngIf="userSrv.regFormModel.get('Passwords.ConfirmPassword')?.touched && userSrv.regFormModel.get('Passwords.ConfirmPassword')?.errors?.required">Поле обязательно для заполнения</label>
-                <label class="text-danger" *ngIf="userSrv.regFormModel.get('Passwords.ConfirmPassword')?.errors?.mismatch">Пароли не совпадают</label>
+                <label class="text-danger" *ngIf="regFormModel.get('Passwords.ConfirmPassword')?.touched && regFormModel.get('Passwords.ConfirmPassword')?.errors?.required">Поле обязательно для заполнения</label>
+                <label class="text-danger" *ngIf="regFormModel.get('Passwords.ConfirmPassword')?.errors?.mismatch">Пароли не совпадают</label>
             </div>
             </div>
             <div class="form-row mt-4">
                 <div class="form-group col-md-8 offset-md-2">
-                    <button type="submit" class="btn btn-primary mb-2" [disabled]="!userSrv.regFormModel.valid">Зарегистрироваться</button>
+                    <button type="submit" class="btn btn-primary mb-2" [disabled]="!regFormModel.valid">Зарегистрироваться</button>
                 </div>
             </div>
         </form>

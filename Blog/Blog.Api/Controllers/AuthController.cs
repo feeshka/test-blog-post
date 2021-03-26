@@ -26,10 +26,7 @@ namespace Blog.Api.Controllers
 		public async Task<IActionResult> RegisterUser ([FromBody]UserSignUpDto userDto)
 		{
 			var result = await _userAuthService.RegisterAsync(userDto);
-			if (result.Succeeded)
-				return Json(result);
-			else
-				return BadRequest();
+			return Json(result);
 		}
 	}
 }
