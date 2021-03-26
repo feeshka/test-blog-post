@@ -1,4 +1,5 @@
 export class BlogInList{
+	Id: number = 0;
 	OwnerName: string = '';
 	BlogName: string = '';
 	BlogShortComment: string = '';

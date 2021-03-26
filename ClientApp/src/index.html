@@ -14,16 +14,16 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">ClientApp</a>
+      <form class="form-inline">
+        <a class="navbar-brand" href="/">Главная</a>
+        <a class="btn btn-sm btn-outline-secondary" type="button">Вход\Регистрация</a>
+      </form>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Главная</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="/blog">Блоги</a>
           </li>
@@ -34,7 +34,7 @@
       </div>
     </div>
   </nav>
-  <div class="p-4">
+  <div class="container m-4 shadow p-3 mb-5 bg-white rounded">
     <app-root></app-root>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
