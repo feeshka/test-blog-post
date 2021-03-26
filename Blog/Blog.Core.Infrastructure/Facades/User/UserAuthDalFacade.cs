@@ -20,13 +20,12 @@ namespace Blog.Core.Infrastructure
 		private readonly SignInManager<User> _signInManager;
 		protected readonly IMapper _mapper;
 
-		public async Task<bool> RegisterAsync (UserSignUpDto userDto)
+		public async Task<IdentityResult> RegisterAsync (UserSignUpDto userDto)
 		{
 			try
 			{
 				var user = _mapper.Map<User>(userDto);
-				var res = await _userManager.CreateAsync(user);
-				return res.Succeeded;
+				return await _userManager.CreateAsync(user);
 			}
 			catch (Exception ex)
 			{

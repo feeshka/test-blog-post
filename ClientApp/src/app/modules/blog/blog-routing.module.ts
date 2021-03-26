@@ -7,7 +7,7 @@ import { ListComponent } from './components/list/list.component';
 const routes: Routes = 
 [
   { path: '', component: ListComponent },
-  { path: 'new', component: CreateComponent },
+  { path: 'new/:id', component: CreateComponent },
   { path: 'view/:id', component: BlogComponent },
   { path: 'view/:id/posts', loadChildren: () => import('../post/post.module').then(m => m.PostModule) },
   

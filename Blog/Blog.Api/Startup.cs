@@ -74,7 +74,12 @@ namespace Blog.Api
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseCors();
+			app.UseCors(builder=> 
+			{
+				builder.WithOrigins("http://localhost:4200")
+						.AllowAnyHeader()
+						.AllowAnyMethod();
+			});
 			app.UseHttpsRedirection();
 
 			app.UseRouting();

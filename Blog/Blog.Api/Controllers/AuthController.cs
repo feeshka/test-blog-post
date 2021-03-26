@@ -13,7 +13,7 @@ namespace Blog.Api.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class AuthController : ControllerBase
+	public class AuthController : Controller
 	{
 		public AuthController (IUserAuthService userAuthService)
 		{
@@ -25,11 +25,8 @@ namespace Blog.Api.Controllers
 		[Route("Registration")]
 		public async Task<IActionResult> RegisterUser ([FromBody]UserSignUpDto userDto)
 		{
-			var registerResult = await _userAuthService.RegisterAsync(userDto);
-			if (registerResult)
-				return Ok();
-			else
-				return BadRequest();
+			var result = await _userAuthService.RegisterAsync(userDto);
+			return Json(result);
 		}
 	}
 }
