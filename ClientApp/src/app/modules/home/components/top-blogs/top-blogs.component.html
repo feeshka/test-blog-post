@@ -1,0 +1,20 @@
+<div class="container shadow p-3 mb-5 bg-white rounded">
+	<div class="row">
+		<div class="col">
+			<h3>Популярные блоги:</h3>
+		</div>
+	</div>
+	<div class="card m-2" *ngFor="let blog of TopBlogs">
+		<h6 class="card-header text-muted">{{blog.OwnerName}}</h6>
+		<div class="card-body">
+			<h5 class="card-title">{{blog.BlogName}}</h5>
+			<p class="card-text">{{blog.BlogShortComment}}</p>
+			<a href="{{'blog/view/'+ blog.Id}}" class="btn btn-info btn-sm w-auto">Читать</a>
+		</div>
+		<div class="card-footer text-muted">
+				<div class="card-text">Дата: {{blog.BlogCreationDate}}</div>
+				<div class="card-text">Постов: {{blog.PostsCount}}</div>
+				<div class="card-text">Рейтинг: {{blog.BlogRating}}</div>
+		</div>
+	</div>
+</div>

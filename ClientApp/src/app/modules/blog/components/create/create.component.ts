@@ -4,6 +4,7 @@ import { BlogCreate } from 'src/app/core/classes/blog/blogCreate';
 import { BlogEdit } from 'src/app/core/classes/blog/blogEdit';
 import { BlogService } from 'src/app/services/blog.service';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -16,9 +17,12 @@ export class CreateComponent implements OnInit {
 
   get edit(){return this._editing}
 
-  constructor(private _fb: FormBuilder, private _blogSrv: BlogService, private _location: Location) { }
+  constructor(private _fb: FormBuilder, private _blogSrv: BlogService, private _location: Location, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this._editing = this._route.snapshot.params.id > 0;
+    if(this._editing)
+      this.loadBlogInfo();
   }
 
   createNewFormModel = this._fb.group({
@@ -27,8 +31,15 @@ export class CreateComponent implements OnInit {
     BlogImage: []
   });
 
+  loadBlogInfo(){
+    // let blog: BlogEdit = this._blogSrv.getBlogById(this._route.snapshot.params.id);
+    // this.createNewFormModel.patchValue({
+    //   BlogName: blog.BlogName,
+    //   BlogComment: blog.BlogComment
+    // });
+  }
+
   onSubmit(){
-    console.log(11);
     this._editing ? this.editBlog() : this.createNewBlog();
   }
 
