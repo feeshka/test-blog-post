@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Blog.Core
 {
-	public interface IBlogDalFacade: IBaseDalFacade<BlogDto, BlogInListDto, long, BlogSearchInput>
+	public interface IBlogDalFacade: IBaseDalFacade<BlogCreateDto, BlogDto, BlogInListDto, long, BlogSearchInput>
 	{
 	}
 }

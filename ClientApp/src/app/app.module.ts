@@ -11,12 +11,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './components/user/login/login.component';
+import { JwtTokenService } from './services/jwt-token.service';
+import { DashboardComponent } from './components/user/dashboard/dashboard.component';
+import { PostsComponent } from './components/user/dashboard/posts/posts.component';
+import { BlogsComponent } from './components/user/dashboard/blogs/blogs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent,
+    DashboardComponent,
+    PostsComponent,
+    BlogsComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     }),
     NgbModule
   ],
-  providers: [UserService],
+  providers: [UserService, JwtTokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

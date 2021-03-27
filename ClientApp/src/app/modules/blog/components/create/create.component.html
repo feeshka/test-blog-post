@@ -21,8 +21,8 @@
 			</div>
 			<div class="form-row mt-4">
 				<div class="form-group col-md-8 offset-md-2">
-					<button *ngIf="edit" type="submit" class="btn btn-primary m-1" [disabled]=(!createNewFormModel.valid)>Создать</button>
-					<button *ngIf="!edit" type="submit" class="btn btn-primary m-1" [disabled]=(!createNewFormModel.valid)>Редактировать</button>
+					<button *ngIf="!Edit" type="submit" class="btn btn-primary m-1" [disabled]=(!createNewFormModel.valid)>Создать</button>
+					<button *ngIf="Edit" type="submit" class="btn btn-primary m-1" [disabled]=(!createNewFormModel.valid)>Редактировать</button>
 					<button type="reset" class="btn btn-danger m-1">Очистить</button>
 					<button (click)="(goBack())" class="btn btn-secondary m-1">Отмена</button>
 				</div>

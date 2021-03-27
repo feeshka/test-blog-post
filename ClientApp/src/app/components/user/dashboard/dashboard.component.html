@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div class="wrapper-div">
+        <button type="submit" class="btn btn-primary m-2" (click)="(newBlog())">Новый блог</button>
+        <button type="submit" class="btn btn-primary m-2" (click)="(newPost())">Новый пост</button>
+    </div>
+    <div class="wrapper-div">
+        <div class="">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink='/dashboard/posts'
+                        routerLinkActive='active'>Посты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLink='/dashboard/blogs'
+                        routerLinkActive='active'>Блоги</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

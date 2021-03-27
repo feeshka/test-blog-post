@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blog.Application.Services
 {
-	public interface IBlogService : IBaseAppService<BlogDto, BlogInListDto, long, BlogSearchInput>
+	public interface IBlogService : IBaseAppService<BlogCreateDto, BlogDto, BlogInListDto, long, BlogSearchInput>
 	{
 
 	}

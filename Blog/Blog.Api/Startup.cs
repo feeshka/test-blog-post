@@ -17,6 +17,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Blog.Api
 {
@@ -32,37 +36,59 @@ namespace Blog.Api
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices( IServiceCollection services )
 		{
+			services.Configure<ApplicationSettings>( Configuration.GetSection( "ApplicationSettings" ) );
 			services.AddControllers();
 			services.AddCors();
-			DependencyContainer.RegisterServices(services);
+			DependencyContainer.RegisterServices( services );
 
 			#region Mapper
 
-			var mapperConfig = new MapperConfiguration(mc =>
-			{
-				mc.AddProfile(new ApplicationMapperConfig());
-			});
+			var mapperConfig = new MapperConfiguration( mc =>
+			 {
+				 mc.AddProfile( new ApplicationMapperConfig() );
+			 } );
 
 			IMapper mapper = mapperConfig.CreateMapper();
-			services.AddSingleton(mapper);
+			services.AddSingleton( mapper );
 
 			#endregion
 
-			services.AddDbContext<ApplicationDbContext>(options =>
-				options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
+			services.AddDbContext<ApplicationDbContext>( options =>
+				 options.UseNpgsql( Configuration.GetConnectionString( "DefaultConnection" ) )
 			);
 
 			services.AddDefaultIdentity<User>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
-			services.Configure<IdentityOptions>(options =>
-			{
-				options.Password.RequireNonAlphanumeric = false;
-				options.Password.RequiredLength = 8;
-				options.Password.RequireDigit = false;
-				options.Password.RequireLowercase = false;
-				options.Password.RequireUppercase = false;
-			});
+			services.Configure<IdentityOptions>( options =>
+			 {
+				 options.Password.RequireNonAlphanumeric = false;
+				 options.Password.RequiredLength = 8;
+				 options.Password.RequireDigit = false;
+				 options.Password.RequireLowercase = false;
+				 options.Password.RequireUppercase = false;
+			 } );
+
+			//Jbt Auth
+			services.AddAuthentication( options =>
+			 {
+				 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+				 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+			 } )
+				.AddJwtBearer( options => 
+				{
+					options.RequireHttpsMetadata = false;
+					options.SaveToken = false;
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						IssuerSigningKey = new SymmetricSecurityKey( Encoding.UTF8.GetBytes( Configuration["ApplicationSettings:SecretKey"].ToString() ) ),
+						ValidateIssuerSigningKey = true,
+						ValidateIssuer = false,
+						ValidateAudience = false,
+						ClockSkew = TimeSpan.Zero
+					};
+				} );
 
 		}
 
@@ -74,12 +100,12 @@ namespace Blog.Api
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseCors(builder=> 
-			{
-				builder.WithOrigins("http://localhost:4200")
-						.AllowAnyHeader()
-						.AllowAnyMethod();
-			});
+			app.UseCors( builder =>
+			 {
+				 builder.WithOrigins( Configuration["ApplicationSettings:ClientUrl"].ToString() )
+						 .AllowAnyHeader()
+						 .AllowAnyMethod();
+			 } );
 			app.UseHttpsRedirection();
 
 			app.UseRouting();

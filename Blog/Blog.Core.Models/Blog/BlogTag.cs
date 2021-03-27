@@ -9,6 +9,6 @@ namespace Blog.Core.Models
 	public class BlogTag : BaseEntity<int>
 	{
 		public string Name { get; set; }
-		public int CreatorUserId { get; set; }
+		public string CreatorUserId { get; set; }
 	}
 }

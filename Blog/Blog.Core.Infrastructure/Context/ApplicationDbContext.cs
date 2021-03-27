@@ -19,7 +19,7 @@ namespace Blog.Core.Infrastructure
 		#region DbSet
 
 		public DbSet<BlogEntity> Blogs { get; set; }
-		public DbSet<User> AppUsers { get; set; }
+		public DbSet<Blog.Core.Models.User> AppUsers { get; set; }
 
 		#endregion
 

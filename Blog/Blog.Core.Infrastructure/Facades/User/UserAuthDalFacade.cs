@@ -10,21 +10,21 @@ namespace Blog.Core.Infrastructure
 {
 	public class UserAuthDalFacade: IUserAuthDalFacade
 	{
-		public UserAuthDalFacade (UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper)
+		public UserAuthDalFacade (UserManager<Blog.Core.Models.User> userManager, SignInManager<Blog.Core.Models.User> signInManager, IMapper mapper)
 		{
 			_userManager = userManager;
 			_signInManager = signInManager;
 			_mapper = mapper;
 		}
-		private readonly UserManager<User> _userManager;
-		private readonly SignInManager<User> _signInManager;
+		private readonly UserManager<Blog.Core.Models.User> _userManager;
+		private readonly SignInManager<Blog.Core.Models.User> _signInManager;
 		protected readonly IMapper _mapper;
 
 		public async Task<IdentityResult> RegisterAsync (UserSignUpDto userDto)
 		{
 			try
 			{
-				var user = _mapper.Map<User>(userDto);
+				var user = _mapper.Map<Blog.Core.Models.User>(userDto);
 				return await _userManager.CreateAsync(user);
 			}
 			catch (Exception ex)
@@ -33,9 +33,9 @@ namespace Blog.Core.Infrastructure
 			}
 		}
 
-		public Task LogIn (UserSignInDto userDto)
+		public async Task<Blog.Core.Models.User> FindByEmailAsync( string email )
 		{
-			throw new NotImplementedException();
+			return await _userManager.FindByEmailAsync( email );
 		}
 	}
 }

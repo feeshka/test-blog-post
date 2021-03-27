@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Blog.Core
 {
-	public interface IBaseDalFacade<TDto, TInListDto, TKey, TSearchInput>
+	public interface IBaseDalFacade<TCreateDto, TDto, TInListDto, TKey, TSearchInput>
 	{
-		Task<TKey> InsertAndGetIdAsync( TDto entity );
+		Task<TKey> InsertAndGetIdAsync( TCreateDto entity );
 		Task<bool> UpdateAsync( TDto entity );
 		Task<bool> DeleteAsync( TKey id );
 		Task<IEnumerable<TInListDto>> GetAllAsync( TSearchInput filter );

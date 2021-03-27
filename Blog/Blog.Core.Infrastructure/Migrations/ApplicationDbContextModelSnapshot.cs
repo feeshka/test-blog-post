@@ -26,6 +26,9 @@ namespace Blog.Core.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .UseIdentityByDefaultColumn();
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -35,15 +38,12 @@ namespace Blog.Core.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("AppBlogs");
                 });
@@ -61,8 +61,8 @@ namespace Blog.Core.Infrastructure.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("CreatorUserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("text");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("boolean");
@@ -303,7 +303,7 @@ namespace Blog.Core.Infrastructure.Migrations
                 {
                     b.HasOne("Blog.Core.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

@@ -9,7 +9,7 @@ namespace Blog.Core.Models
 	public class Comment : BaseEntity<long>
 	{
 		public string Content { get; set; }
-		public long UserId { get; set; }
+		public string UserId { get; set; }
 		public User User { get; set; }
 		public long ParentCommentId { get; set; }
 		public long PostId { get; set; }

@@ -1,0 +1,15 @@
+<form [formGroup]="loginFormModel" autocomplete="off" (submit)="onSubmit()">
+    <div class="form-group col-md-8 offset-md-2 required">
+        <label>Email</label>
+        <input class="form-control" formControlName="Email">
+    </div>
+    <div class="form-group col-md-8 offset-md-2 required">
+        <label>Пароль</label>
+        <input type="password" class="form-control" formControlName="Password">
+    </div>
+    <div class="form-row mt-4">
+        <div class="form-group col-md-8 offset-md-2">
+            <button type="submit" class="btn btn-primary mb-2" [disabled]="!loginFormModel.valid">Войти</button>
+        </div>
+    </div>
+</form>

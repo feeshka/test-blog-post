@@ -1,5 +1,19 @@
-<div class="container">
-    <div class="col-md-8 offset-md-2">
-        <router-outlet></router-outlet>
+<div class="wrapper">
+    <div class="wrapper-div">
+        <div class="">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" routerLink='/user/login' routerLinkActive='active'>Вход</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" routerLink='/user/registration' routerLinkActive='active'>Регистрация</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
     </div>
 </div>

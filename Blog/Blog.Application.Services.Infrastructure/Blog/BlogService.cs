@@ -39,7 +39,7 @@ namespace Blog.Application.Services.Infrastructure
 			}
 		}
 
-		public async Task<long> CreateNewAsync (BlogDto newBlog)
+		public async Task<long> CreateNewAsync ( BlogCreateDto newBlog )
 		{
 			try
 			{

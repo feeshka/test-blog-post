@@ -9,30 +9,30 @@ import { BlogFilter } from '../core/classes/blog/blog-filter';
 })
 export class BlogService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
-  createNewBlog(newBlog: BlogCreate){
-    newBlog.UserId = <string>localStorage.getItem('userId');
+  createNewBlog(newBlog: BlogCreate) {
+    return this._http.post("https://localhost:44343/api/blog/new-blog", newBlog);
   }
 
-  updateBlog(edited: BlogEdit){
+  updateBlog(edited: BlogEdit) {
     edited.UserId = <string>localStorage.getItem('userId');
 
   }
 
-  getBlogById(blogId: number){
-    
-  }
-
-  getAllUserBlogs(userId: string){
+  getBlogById(blogId: number) {
 
   }
 
-  getTopBlogs(count: number){
+  getAllUserBlogs(userId: string) {
 
   }
 
-  getAllBlogs(filter: BlogFilter){
+  getTopBlogs(count: number) {
+
+  }
+
+  getAllBlogs(filter: BlogFilter) {
 
   }
 }

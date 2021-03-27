@@ -9,6 +9,6 @@ namespace Blog.Core
 	public interface IUserAuthDalFacade
 	{
 		Task<IdentityResult> RegisterAsync (UserSignUpDto userDto);
-		Task LogIn (UserSignInDto userDto);
+		Task<Blog.Core.Models.User> FindByEmailAsync (string email);
 	}
 }

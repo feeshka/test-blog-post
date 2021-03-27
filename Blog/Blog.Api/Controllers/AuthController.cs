@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Blog.Application.Services;
 using Blog.Core;
 using Blog.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,14 @@ namespace Blog.Api.Controllers
 		{
 			var result = await _userAuthService.RegisterAsync(userDto);
 			return Json(result);
+		}
+
+		[HttpPost]
+		[Route( "Login" )]
+		public async Task<IActionResult> Login([FromBody] UserSignInDto userDto)
+		{
+			var result = await _userAuthService.LogInAsync(userDto);
+			return Json( result );
 		}
 	}
 }

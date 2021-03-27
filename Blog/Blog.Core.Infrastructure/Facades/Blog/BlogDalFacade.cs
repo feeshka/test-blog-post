@@ -79,7 +79,7 @@ namespace Blog.Core.Infrastructure
 
 		}
 
-		public async Task<long> InsertAndGetIdAsync (BlogDto entity)
+		public async Task<long> InsertAndGetIdAsync ( BlogCreateDto entity )
 		{
 			try
 			{

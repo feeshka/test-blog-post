@@ -8,8 +8,9 @@ namespace Blog.Core.Models
 	public class BlogEntity : BaseEntity<long>
 	{
 		public string Name { get; set; }
-		public long UserId { get; set; }
+		public string UserId { get; set; }
 		public User User { get; set; }
+		public string Comment { get; set; }
 		public ICollection<BlogTag> Tags { get; set; }
 	}
 }
