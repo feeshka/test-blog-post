@@ -9,6 +9,6 @@ namespace Blog.Core.Models
 	public class PostsRating : BaseEntity<long>
 	{
 		public int UsersCount { get; set; }
-		public double Stars { get; set; }
+		public int Stars { get; set; }
 	}
 }

@@ -10,6 +10,7 @@ namespace Blog.Application.Services
 		public Task<IEnumerable<TInListDto>> GetAllAsync (TSearchInput input);
 		public Task<TDto> GetByIdAsync (TKey blogId);
 		public Task<TKey> CreateNewAsync ( TCreateDto newBlog );
+		Task<bool> UpdateAsync( TCreateDto entity );
 		public Task<bool> DeleteByIdAsync (TKey id);
 	}
 }

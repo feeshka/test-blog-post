@@ -1,9 +1,8 @@
 export class Post{
 	ownerUserId: string = '';
-	ownerName: string = '';
-	postName: string = '';
-	postComment: string = '';
-	postCreationDate: string = '';
-	postsCount: number = 0;
-	postRating: number = 0;
+	ownerUserName: string = '';
+	name: string = '';
+	content: string = '';
+	creationDate: string = '';
+	rating: number = 0;
 }

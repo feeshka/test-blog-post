@@ -10,5 +10,6 @@ namespace Blog.Core
 		public double Rating { get; set; }
 		public string BlogName { get; set; }
 		public string UserId { get; set; }
+		public long Id { get; set; }
 	}
 }

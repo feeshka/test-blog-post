@@ -15,24 +15,15 @@ export class BlogService {
     return this._http.post("https://localhost:44343/api/blog/new-blog", newBlog);
   }
 
-  updateBlog(edited: BlogEdit) {
-    edited.userId = <string>localStorage.getItem('userId');
-
+  updateBlog(updated: BlogCreate) {
+    return this._http.post("https://localhost:44343/api/blog/update", updated);
   }
 
-  getBlogById(blogId: number) {
-
+  getPostById(id: string) {
+    return this._http.get("https://localhost:44343/api/blog/get-blog", {params: {id: id}});
   }
 
-  getAllUserBlogs(userId: string) {
-
-  }
-
-  getTopBlogs(count: number) {
-
-  }
-
-  getAllBlogs(filter: BlogFilter) {
-
+  getAll(filter: BlogFilter) {
+    return this._http.post("https://localhost:44343/api/blog/list", filter);
   }
 }

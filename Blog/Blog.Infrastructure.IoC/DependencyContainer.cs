@@ -15,9 +15,13 @@ namespace Blog.Infrastructure.IoC
 			services.AddScoped<IBlogService, BlogService>();
 			services.AddScoped<IUserAuthService, UserAuthService>();
 			services.AddScoped<IUserService, UserService>();
-			services.AddScoped<IBlogDalFacade, BlogDalFacade>();
 			services.AddScoped<IUserAuthDalFacade, UserAuthDalFacade>();
 			services.AddScoped<IUserDalFacade, UserDalFacade>();
+			services.AddScoped<IHomeDalFacade, HomeDalFacade>();
+			services.AddScoped<IHomeService, HomeService>();
+			services.AddScoped<IPostDalFacade, PostDalFacade>();
+			services.AddScoped<IPostService, PostService>();
+
 
 		}
 	}

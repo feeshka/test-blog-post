@@ -38,14 +38,43 @@ namespace Blog.Core.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<long?>("RatingId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RatingId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("AppBlogs");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.BlogRating", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsersCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppBlogsRatings");
                 });
 
             modelBuilder.Entity("Blog.Core.Models.BlogTag", b =>
@@ -118,11 +147,11 @@ namespace Blog.Core.Infrastructure.Migrations
                         .HasColumnType("bigint")
                         .UseIdentityByDefaultColumn();
 
-                    b.Property<long?>("BlogEntityId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("BlogId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("timestamp without time zone");
@@ -136,14 +165,16 @@ namespace Blog.Core.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<long>("RatingId")
+                    b.Property<long?>("RatingId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogEntityId");
+                    b.HasIndex("BlogId");
 
                     b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("RatingId");
 
                     b.ToTable("AppPosts");
                 });
@@ -175,6 +206,30 @@ namespace Blog.Core.Infrastructure.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("AppPostTags");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.PostsRating", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsersCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppPostsRatings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -401,9 +456,15 @@ namespace Blog.Core.Infrastructure.Migrations
 
             modelBuilder.Entity("Blog.Core.Models.BlogEntity", b =>
                 {
+                    b.HasOne("Blog.Core.Models.BlogRating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId");
+
                     b.HasOne("Blog.Core.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Rating");
 
                     b.Navigation("User");
                 });
@@ -432,15 +493,25 @@ namespace Blog.Core.Infrastructure.Migrations
 
             modelBuilder.Entity("Blog.Core.Models.Post", b =>
                 {
-                    b.HasOne("Blog.Core.Models.BlogEntity", null)
+                    b.HasOne("Blog.Core.Models.BlogEntity", "Blog")
                         .WithMany("Posts")
-                        .HasForeignKey("BlogEntityId");
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Blog.Core.Models.User", "CreatorUser")
                         .WithMany()
                         .HasForeignKey("CreatorUserId");
 
+                    b.HasOne("Blog.Core.Models.PostsRating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId");
+
+                    b.Navigation("Blog");
+
                     b.Navigation("CreatorUser");
+
+                    b.Navigation("Rating");
                 });
 
             modelBuilder.Entity("Blog.Core.Models.PostTag", b =>

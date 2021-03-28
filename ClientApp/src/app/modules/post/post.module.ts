@@ -9,10 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 
 @NgModule({
-  declarations: [PostComponent, CreateComponent, ListComponent, CreateComponent],
+  declarations: [PostComponent, CreateComponent, ListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PostRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    EditorModule
   ]
 })
 export class PostModule { }

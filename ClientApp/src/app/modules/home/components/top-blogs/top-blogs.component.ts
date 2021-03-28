@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BlogInList } from 'src/app/core/classes/blog/blog-in-list';
 import { HomeService } from 'src/app/services/home.service';
 
@@ -11,35 +12,24 @@ export class TopBlogsComponent implements OnInit {
 
   private _topBlogs: BlogInList[] = [];
 
-  constructor(private _homeSrv: HomeService) { }
+  constructor(private _homeSrv: HomeService, private _toastr: ToastrService) { }
 
-  get TopBlogs(){return this._topBlogs}
+  get TopBlogs() { return this._topBlogs }
 
   ngOnInit(): void {
     this.getTopBlogs();
   }
 
-  getTopBlogs(){
-    this._topBlogs = [
-      {
-	    id: 0,
-      ownerName: 'OwnerName',
-      blogName: 'BlogName',
-      blogShortComment: 'BlogShortComment',
-      blogCreationDate: '03-01-2020',
-      postsCount: 1,
-      blogRating: 2,
-    },
-    {
-	    id: 1,
-      ownerName: 'OwnerName2',
-      blogName: 'BlogName2',
-      blogShortComment: 'BlogShortComment2',
-      blogCreationDate: '03-01-2020',
-      postsCount: 1000,
-      blogRating: 2,
-    }]
-    //return this._homeSrv.getTopBlogs(10);
-  }
+  getTopBlogs() {
 
+    this._homeSrv.getTopBlogs('10')
+      .subscribe(
+        (res: any) => {
+          this._topBlogs = <BlogInList[]>res
+        },
+        error => {
+          this._toastr.error('', "Ошибка")
+        }
+      );
+  }
 }

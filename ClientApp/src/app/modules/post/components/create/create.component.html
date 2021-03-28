@@ -1,6 +1,19 @@
 <div class="row mt-4">
 	<div class="col md-3">
-		<form [formGroup]="createNewFormModel" autocomplete="off">
+		<form [formGroup]="createNewFormModel" autocomplete="off" (submit)=(onSubmit())>
+					<div class="form-group col-md-8 offset-md-2 required">
+						<label>Выберите блог</label>
+						<select formControlName="BlogId"
+						class="form-control m-2 w-auto d-inline-block text-muted">
+						<option value=""></option>
+						<option *ngFor="let blog of Blogs" [value]="blog.id">
+							{{blog.name}}
+						  </option>
+					</select>
+						<label class="text-danger"
+							*ngIf="createNewFormModel.get('BlogId')?.touched && createNewFormModel.get('BlogId')?.errors?.required">Поле
+							обязательно для заполнения</label>
+					</div>
 			<div class="form-group col-md-8 offset-md-2 required">
 				<label>Название поста</label>
 				<input class="form-control" formControlName="PostName">
@@ -11,12 +24,34 @@
 					символов</label>
 			</div>
 			<div class="form-group mt-4 col-md-8 offset-md-2 required">
-				<angular-editor formControlName="PostContent" [config]="editorConfig"></angular-editor>
+				<editor formControlName="PostContent" 
+   [init]="{
+     height: 500,
+     menubar: false,
+     plugins: [
+       'advlist autolink lists link image charmap print preview anchor',
+       'searchreplace visualblocks code fullscreen',
+       'insertdatetime media table paste code help wordcount'
+     ],
+     toolbar:
+       'undo redo | formatselect | bold italic backcolor | \
+       alignleft aligncenter alignright alignjustify | \
+       bullist numlist outdent indent | removeformat | help'
+   }"
+ ></editor>
 				<label class="text-danger"
 					*ngIf="createNewFormModel.get('PostContent')?.touched && createNewFormModel.get('PostContent')?.errors?.required">Поле
 					обязательно для заполнения</label>
 				<label class="text-danger" *ngIf="createNewFormModel.get('PostContent')?.errors?.minlength">Минимум 100
 					символов</label>
+			</div>
+			<div class="form-row mt-4">
+				<div class="form-group col-md-8 offset-md-2">
+					<button *ngIf="!Edit" type="submit" class="btn btn-primary m-1" [disabled]=(!createNewFormModel.valid)>Создать</button>
+					<button *ngIf="Edit" type="submit" class="btn btn-primary m-1" [disabled]=(!createNewFormModel.valid)>Редактировать</button>
+					<button type="reset" class="btn btn-danger m-1">Очистить</button>
+					<button (click)="(goBack())" class="btn btn-secondary m-1">Отмена</button>
+				</div>
 			</div>
 		</form>
 	</div>

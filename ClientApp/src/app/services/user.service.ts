@@ -11,23 +11,30 @@ export class UserService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 
-  register(newUser: UserReg){
+  register(newUser: UserReg) {
     return this.http.post("https://localhost:44343/api/auth/registration", newUser);
   }
 
-  login(user: UserLogin){
+  login(user: UserLogin) {
     return this.http.post("https://localhost:44343/api/auth/login", user);
   }
 
-  getDashboardInfo(){
-    return this.http.get("https://localhost:44343/api/user/dashboard", {params: {userId: <string>localStorage.getItem('UserId')}});
+  getDashboardInfo() {
+    return this.http.get("https://localhost:44343/api/user/dashboard", { params: { userId: <string>localStorage.getItem('UserId') } });
   }
 
-  getCurrentUserBlogs(){
-    return this.http.get("https://localhost:44343/api/user/dashboard/current-user-blog", {params: {userId: <string>localStorage.getItem('UserId')}});
+  getCurrentUserBlogs() {
+    return this.http.get("https://localhost:44343/api/user/dashboard/current-user-blog", { params: { userId: <string>localStorage.getItem('UserId') } });
   }
 
-  getCurrentUserPosts(){
+  getCurrentUserPosts() {
     return this.http.get("https://localhost:44343/api/user/dashboard/current-user-posts");
+  }
+
+  userLoggedIn() {
+    if (localStorage.getItem("token") == null)
+      return false;
+    else
+      return true;
   }
 }

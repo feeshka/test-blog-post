@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { PostInList } from 'src/app/core/classes/post/post-in-list';
 import { HomeService } from 'src/app/services/home.service';
 
@@ -11,7 +12,7 @@ export class TopPostsComponent implements OnInit {
 
   private _topPosts: PostInList[] = [];
 
-  constructor(private _homeSrv: HomeService) { }
+  constructor(private _homeSrv: HomeService, private _toastr: ToastrService) { }
 
   get TopPosts(){return this._topPosts}
 
@@ -20,25 +21,15 @@ export class TopPostsComponent implements OnInit {
   }
 
   getTopPosts(){
-    this._topPosts = [
-      {
-	    id: 0,
-      ownerUserId: '0000',
-      ownerName: 'OwnerName',
-      postName: 'PostName',
-      postShortComment: 'PostShortComment',
-      postCreationDate: '03-01-2020',
-      postRating: 2,
-    },
-    {
-	    id: 1,
-      ownerUserId: '0000',
-      ownerName: 'OwnerName2',
-      postName: 'PostName2',
-      postShortComment: 'PostShortComment2',
-      postCreationDate: '03-01-2020',
-      postRating: 2,
-    }]
-    //return this._homeSrv.getTopPosts(10);
+
+    this._homeSrv.getTopPosts('10')
+    .subscribe(
+      (res: any) => {
+        this._topPosts = <PostInList[]>res
+      },
+      error => {
+        this._toastr.error('', "Ошибка")
+      }
+    );
   }
 }

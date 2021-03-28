@@ -20,12 +20,16 @@ namespace Library.Dal.Infrastructure
 
 			#region Blog
 
-			CreateMap<BlogEntity, BlogDto>();
+			CreateMap<BlogEntity, BlogDto>()
+				.ForMember( e => e.CreationDate, options => options.MapFrom( x => x.CreationDate.ToString( "dd-MM-yyyy" ) ) );
+
 
 			CreateMap<BlogDto, BlogEntity>()
 				.ForMember( e => e.Id, options => options.Ignore() )
 				.ForMember( e => e.UserId, options => options.MapFrom( x => x.OwnerUserId ) )
 				.AfterMap( ( s, d ) => d.CreationDate = DateTime.UtcNow );
+
+			CreateMap<BlogEntity, BlogSelectItemDto>();
 
 			CreateMap<BlogCreateDto, BlogEntity>()
 				.ForMember( e => e.Id, options => options.Ignore() )
@@ -38,7 +42,33 @@ namespace Library.Dal.Infrastructure
 				.ForMember( e => e.PostsCount, options => options.MapFrom( x => x.Posts.Count ) )
 				.ForMember( e => e.BlogCreationDate, options => options.MapFrom( x => x.CreationDate ) )
 				.ForMember( e => e.BlogShortComment, options => options.MapFrom( x => x.Comment.Substring(0, BlogConstants.SHORT_COMMENT_LENGTH ) ) )
+				.ForMember( e => e.BlogOwnerName, options => options.MapFrom( x => x.User.UserName ) )
 				.AfterMap( ( s, d ) => d.BlogRating = 4 );
+
+			#endregion
+
+			#region Post
+
+			CreateMap<Post, PostDto>()
+				.ForMember( e => e.CreationDate, options => options.MapFrom( x => x.CreationDate.ToString( "dd-MM-yyyy" ) ) );
+
+			CreateMap<PostDto, Post>()
+				.ForMember( e => e.Id, options => options.Ignore() )
+				.ForMember( e => e.CreatorUserId, options => options.MapFrom( x => x.OwnerUserId ) )
+				.AfterMap( ( s, d ) => d.CreationDate = DateTime.UtcNow );
+
+
+			CreateMap<PostCreateDto, Post>()
+				.ForMember( e => e.Id, options => options.Ignore() )
+				.ForMember( e => e.Name, options => options.MapFrom( x => x.PostName ) )
+				.ForMember( e => e.Content, options => options.MapFrom( x => x.PostComment ) )
+				.AfterMap( ( s, d ) => d.CreationDate = DateTime.UtcNow );
+
+			CreateMap<Post, PostInListDto>()
+				.ForMember( e => e.PostName, options => options.MapFrom( x => x.Name ) )
+				.ForMember( e => e.PostCreationDate, options => options.MapFrom( x => x.CreationDate ) )
+				.ForMember( e => e.PostOwnerName, options => options.MapFrom( x => x.CreatorUser.UserName ) )
+				.AfterMap( ( s, d ) => d.PostRating = 4 );
 
 			#endregion
 
@@ -53,9 +83,26 @@ namespace Library.Dal.Infrastructure
 
 			CreateMap<User, UserProfileDto>()
 				.ForMember( e => e.FullName, options => options.MapFrom( x => $"{x.FirstName} {x.LastName}" ) );
+
 			#endregion
 
+			#region Home
 
+			CreateMap<BlogEntity, TopBlogInListDto>()
+			.ForMember( e => e.BlogName, options => options.MapFrom( x => x.Name ) )
+			.ForMember( e => e.PostsCount, options => options.MapFrom( x => x.Posts.Count ) )
+			.ForMember( e => e.BlogCreationDate, options => options.MapFrom( x => x.CreationDate ) )
+			.ForMember( e => e.BlogShortComment, options => options.MapFrom( x => x.Comment.Substring( 0, BlogConstants.SHORT_COMMENT_LENGTH ) ) )
+			.ForMember( e => e.BlogOwner, options => options.MapFrom( x => x.User.UserName ) )
+			.AfterMap( ( s, d ) => d.BlogRating = 4 );
+
+			CreateMap<Post, TopPostInListDto>()
+			.ForMember( e => e.PostName, options => options.MapFrom( x => x.Name ) )
+			.ForMember( e => e.PostCreationDate, options => options.MapFrom( x => x.CreationDate ) )
+			.ForMember( e => e.AuthorName, options => options.MapFrom( x => x.Blog.User.UserName ) )
+			.AfterMap( ( s, d ) => d.PostRating = 4 );
+
+			#endregion
 		}
 	}
 }

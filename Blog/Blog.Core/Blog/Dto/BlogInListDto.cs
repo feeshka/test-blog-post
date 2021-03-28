@@ -8,6 +8,7 @@ namespace Blog.Core
 	{
 		public long Id { get; set; }
 		public string BlogName { get; set; }
+		public string BlogOwnerName { get; set; }
 		public int BlogRating { get; set; }
 		public string BlogShortComment { get; set; }
 		public DateTime BlogCreationDate { get; set; }

@@ -48,6 +48,7 @@ namespace Blog.Core.Infrastructure
 			try
 			{
 				return await _context.Blogs
+							.Include(x=> x.User)
 							.Where(x => filter.CreationFrom.HasValue && x.CreationDate >= filter.CreationFrom)
 							.Where(x => filter.CreationTo.HasValue && x.CreationDate <= filter.CreationTo)
 							.Where(x => !String.IsNullOrEmpty(filter.BlogName) && x.Name.Contains(filter.BlogName))
@@ -95,12 +96,15 @@ namespace Blog.Core.Infrastructure
 			}
 		}
 
-		public async Task<bool> UpdateAsync (BlogDto entity)
+		public async Task<bool> UpdateAsync ( BlogCreateDto entity )
 		{
 			try
 			{
-				var newEntity = _mapper.Map<BlogEntity>(entity);
-				_context.Blogs.Add(newEntity);
+				var storage = await _context.Blogs.Where( x => x.Id == entity.Id ).FirstOrDefaultAsync();
+				if ( storage == null )
+					throw new Exception( "Not found" );
+
+				storage = _mapper.Map<BlogEntity>( storage );
 				await _context.SaveChangesAsync();
 				return true;
 			}

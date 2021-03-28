@@ -7,7 +7,7 @@ namespace Blog.Core
 	public class BlogDto
 	{
 		public string Name { get; set; }
-		public DateTime CreationDate { get; set; }
+		public string CreationDate { get; set; }
 		public double Rating { get; set; }
 		public string OwnerUserName { get; set; }
 		public string OwnerUserId { get; set; }

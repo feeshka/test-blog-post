@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { PostFilter } from 'src/app/core/classes/post/post-filter';
 import { PostInList } from 'src/app/core/classes/post/post-in-list';
 import { PostService } from 'src/app/services/post.service';
@@ -13,7 +14,7 @@ export class ListComponent implements OnInit {
 
   private _posts: PostInList[] = [];
 
-  constructor(private _postSrv: PostService, private _fb:FormBuilder) { }
+  constructor(private _postSrv: PostService, private _fb:FormBuilder, private _toastr: ToastrService) { }
 
   get Posts(){return this._posts}
 
@@ -37,25 +38,15 @@ export class ListComponent implements OnInit {
       dateFrom: '',
       dateTo: ''
     }
-    this._posts = [
-      {
-	    id: 0,
-      ownerUserId: '0000',
-      ownerName: 'OwnerName',
-      postName: 'PostName',
-      postShortComment: 'PostShortComment',
-      postCreationDate: '03-01-2020',
-      postRating: 2,
-    },
-    {
-	    id: 1,
-      ownerUserId: '0000',
-      ownerName: 'OwnerName2',
-      postName: 'PostName2',
-      postShortComment: 'PostShortComment2',
-      postCreationDate: '03-01-2020',
-      postRating: 2,
-    }]
-    //return this._postSrv.getPosts(filter);
+
+    this._postSrv.getAll(filter)
+    .subscribe(
+      (res: any) => {
+        this._posts = <PostInList[]>res
+      },
+      error => {
+        this._toastr.error('', "Ошибка")
+      }
+    );
   }
 }

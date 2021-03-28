@@ -62,5 +62,17 @@ namespace Blog.Application.Services.Infrastructure
 				throw new Exception(ex.Message);
 			}
 		}
+
+		public async Task<bool> UpdateAsync( BlogCreateDto entity )
+		{
+			try
+			{
+				return await _blogDalFacade.UpdateAsync( entity );
+			}
+			catch ( Exception ex )
+			{
+				throw new Exception( ex.Message );
+			}
+		}
 	}
 }

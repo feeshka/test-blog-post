@@ -11,6 +11,7 @@ namespace Blog.Core.Models
 		public string UserId { get; set; }
 		public User User { get; set; }
 		public string Comment { get; set; }
+		public BlogRating Rating { get; set; }
 		public ICollection<BlogTag> Tags { get; set; }
 		public ICollection<Post> Posts { get; set; }
 	}

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ClientApp';
+
+  
+  public get Login() : boolean {
+    return this._userSrv.userLoggedIn()
+  }
+  
+  constructor(private _userSrv: UserService, private _router: Router){}
+
+  loggedOut(){
+    localStorage.clear();
+    this._router.navigateByUrl("/home");
+  }
 }

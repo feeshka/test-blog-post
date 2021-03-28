@@ -9,11 +9,13 @@ namespace Blog.Core.Models
 	public class Post : BaseEntity<long>
 	{
 		public string Name { get; set; }
+		public string Content { get; set; }
 		public long BlogId { get; set; }
 		public User CreatorUser { get; set; }
 		public string CreatorUserId { get; set; }
 		public ICollection<PostTag> Tags { get; set; }
-		public long RatingId { get; set; }
+		public PostsRating Rating { get; set; }
+		public BlogEntity Blog { get; set; }
 		public ICollection<Comment> Comments { get; set; }
 	}
 }
