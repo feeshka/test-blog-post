@@ -1,9 +1,9 @@
 export class BlogInList{
-	Id: number = 0;
-	OwnerName: string = '';
-	BlogName: string = '';
-	BlogShortComment: string = '';
-	BlogCreationDate: string = '';
-	PostsCount: number = 0;
-	BlogRating: number = 0;
+	id: number = 0;
+	ownerName: string = '';
+	blogName: string = '';
+	blogShortComment: string = '';
+	blogCreationDate: string = '';
+	postsCount: number = 0;
+	blogRating: number = 0;
 }

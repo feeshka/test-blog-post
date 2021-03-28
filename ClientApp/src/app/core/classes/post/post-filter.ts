@@ -1,7 +1,7 @@
 export class PostFilter{
-	PostName: string = '';
-	DateFrom: string = '';
-	DateTo: string = '';
-	RatingFrom: number = 0;
-	RatingTo: number = 0;
+	postName: string = '';
+	dateFrom: string = '';
+	dateTo: string = '';
+	ratingFrom: number = 0;
+	ratingTo: number = 0;
 }

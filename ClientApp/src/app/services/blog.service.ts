@@ -16,7 +16,7 @@ export class BlogService {
   }
 
   updateBlog(edited: BlogEdit) {
-    edited.UserId = <string>localStorage.getItem('userId');
+    edited.userId = <string>localStorage.getItem('userId');
 
   }
 

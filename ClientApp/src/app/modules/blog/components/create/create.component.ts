@@ -46,26 +46,26 @@ export class CreateComponent implements OnInit {
 
   editBlog() {
     let editItem: BlogEdit = {
-      BlogName: this.createNewFormModel.value.BlogName,
-      BlogComment: this.createNewFormModel.value.BlogComment,
-      BlogId: 0,//TODO
-      UserId: ''
+      blogName: this.createNewFormModel.value.BlogName,
+      blogComment: this.createNewFormModel.value.BlogComment,
+      blogId: 0,//TODO
+      userId: ''
     };
 
     this._blogSrv.updateBlog(editItem);
   }
 
   createNewBlog() {
-
+console.log(localStorage.getItem("UserId"));
     let newBlog: BlogCreate = {
-      BlogName: this.createNewFormModel.value.BlogName,
-      BlogComment: this.createNewFormModel.value.BlogComment,
-      UserId: <string>localStorage.getItem("UserId")
+      blogName: this.createNewFormModel.value.BlogName,
+      blogComment: this.createNewFormModel.value.BlogComment,
+      userId: <string>localStorage.getItem("UserId")
     };
 
     this._blogSrv.createNewBlog(newBlog).subscribe((result: any) => {
       console.log(result);
-      this._router.navigateByUrl('/blog/view/' + result.result);
+      this._router.navigateByUrl('/blog/view/' + result);
       this._toastr.success("Новый блог создан!", "Успешно");
     },
       error => {

@@ -22,22 +22,22 @@ export class TopBlogsComponent implements OnInit {
   getTopBlogs(){
     this._topBlogs = [
       {
-	    Id: 0,
-      OwnerName: 'OwnerName',
-      BlogName: 'BlogName',
-      BlogShortComment: 'BlogShortComment',
-      BlogCreationDate: '03-01-2020',
-      PostsCount: 1,
-      BlogRating: 2,
+	    id: 0,
+      ownerName: 'OwnerName',
+      blogName: 'BlogName',
+      blogShortComment: 'BlogShortComment',
+      blogCreationDate: '03-01-2020',
+      postsCount: 1,
+      blogRating: 2,
     },
     {
-	    Id: 1,
-      OwnerName: 'OwnerName2',
-      BlogName: 'BlogName2',
-      BlogShortComment: 'BlogShortComment2',
-      BlogCreationDate: '03-01-2020',
-      PostsCount: 1000,
-      BlogRating: 2,
+	    id: 1,
+      ownerName: 'OwnerName2',
+      blogName: 'BlogName2',
+      blogShortComment: 'BlogShortComment2',
+      blogCreationDate: '03-01-2020',
+      postsCount: 1000,
+      blogRating: 2,
     }]
     //return this._homeSrv.getTopBlogs(10);
   }

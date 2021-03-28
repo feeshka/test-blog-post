@@ -6,8 +6,12 @@ namespace Blog.Core
 {
 	public class BlogInListDto
 	{
-		public int Name { get; set; }
-		public double Rating { get; set; }
-		public long PostsCount { get; set; }
+		public long Id { get; set; }
+		public string BlogName { get; set; }
+		public int BlogRating { get; set; }
+		public string BlogShortComment { get; set; }
+		public DateTime BlogCreationDate { get; set; }
+
+		public int PostsCount { get; set; }
 	}
 }

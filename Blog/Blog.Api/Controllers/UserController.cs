@@ -22,9 +22,8 @@ namespace Blog.Api.Controllers
 		[HttpGet]
 		[Authorize]
 		[Route("Dashboard")]
-		public async Task<IActionResult> GetUserPersonalProfile()
+		public async Task<IActionResult> GetUserPersonalProfile([FromQuery]string userId )
 		{
-			var userId = User.Claims.First( x => x.Type == "UserId" ).Value;
 			var result = await _userService.GetProfileByUserIdAsync( userId );
 			return Json( result );
 		}
@@ -32,9 +31,8 @@ namespace Blog.Api.Controllers
 		[HttpGet]
 		[Authorize]
 		[Route( "Dashboard/current-user-blog" )]
-		public async Task<IActionResult> GetCurrentUserBlogs()
+		public async Task<IActionResult> GetCurrentUserBlogs([FromQuery] string userId)
 		{
-			var userId = User.Claims.First( x => x.Type == "UserId" ).Value;
 			var result = await _userService.GetCurrentUserBlogsAsync( userId );
 			return Json( result );
 		}

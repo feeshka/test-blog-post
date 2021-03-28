@@ -1,7 +1,7 @@
 export class BlogFilter{
-	BlogName: string = '';
-	DateFrom: string = '';
-	DateTo: string = '';
-	RatingFrom: number = 0;
-	RatingTo: number = 0;
+	blogName: string = '';
+	dateFrom: string = '';
+	dateTo: string = '';
+	ratingFrom: number = 0;
+	ratingTo: number = 0;
 }

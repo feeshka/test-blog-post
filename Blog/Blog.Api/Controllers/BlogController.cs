@@ -23,10 +23,9 @@ namespace Blog.Api.Controllers
 
 		[HttpPost]
 		[Route("new-blog")]
-		//[Authorize]
+		[Authorize]
 		public async Task<IActionResult> CreateNewBlog( [FromBody]BlogCreateDto newBlog)
 		{
-			newBlog.OwnerUserId = User.Claims.FirstOrDefault( x => x.Type == "UserId" ).Value;
 			var result = await _blogService.CreateNewAsync( newBlog );
 			return Json( result );
 		}

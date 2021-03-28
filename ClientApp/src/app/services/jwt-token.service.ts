@@ -9,23 +9,20 @@ export class JwtTokenService {
   constructor() { }
 
   isTokenValid(){
-    // let token = localStorage.getItem("token");
-    // let decoded: any = {};
-    // let now =this.getNowUTC();
-    // if(token != null){
-    //   decoded = jwt_decode(token);
-    //   console.log(decoded);
-    //   console.log(now);
-    //   console.log(decoded.ExpDate < now);
-    //   if(decoded.ExpDate < now)
-    //     return false;
-    //   else
-    //     return true;
-    // }
-    // else{
-    //   return false;
-    // }
-    return true;
+    let token = localStorage.getItem("token");
+    let decoded: any = {};
+      console.log(token);
+      let now =this.getNowUTC();
+    if(token != null){
+      decoded = jwt_decode(token);
+      if(decoded.ExpDate < now)
+        return false;
+      else
+        return true;
+    }
+    else{
+      return false;
+    }
   }
 
   private getNowUTC() {

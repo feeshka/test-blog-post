@@ -1,13 +1,14 @@
 <div class="card m-2" *ngFor="let blog of Blogs">
-    <h6 class="card-header text-muted">{{blog.OwnerName}}</h6>
     <div class="card-body">
-        <h5 class="card-title">{{blog.BlogName}}</h5>
-        <p class="card-text">{{blog.BlogShortComment}}</p>
-        <a href="{{'blog/view/'+ blog.Id}}" class="btn btn-info btn-sm w-auto">Читать</a>
+        <h5 class="card-title">{{blog.blogName}}</h5>
+        <p class="card-text">{{blog.blogShortComment}}</p>
+        <a href="{{'/blog/view/'+ blog.id}}" class="btn btn-info btn-sm w-auto m-2">Читать</a>
+        <a href="{{'/blog/view/'+ blog.id + '/posts/new/0'}}" class="btn btn-info btn-sm w-auto m-2 pull-right">Добавить пост</a>
     </div>
     <div class="card-footer text-muted">
-        <div class="card-text">Дата: {{blog.BlogCreationDate}}</div>
-        <div class="card-text">Рейтинг: {{blog.BlogRating}}</div>
-        <ngb-rating [(rate)]="blog.BlogRating" [readonly]="true" [max]=5></ngb-rating>
+        <div class="card-text">Дата: {{blog.blogCreationDate}}</div>
+        <div class="card-text">Постов: {{blog.postsCount}}</div>
+        <div class="card-text">Рейтинг: {{blog.blogRating}}</div>
+        <ngb-rating [(rate)]="blog.blogRating" [readonly]="true" [max]=5></ngb-rating>
     </div>
 </div>

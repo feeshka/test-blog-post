@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
   children: [
-    { path: 'blogs', component: BlogsComponent },
+    { path: '', component: BlogsComponent },
     { path: 'posts', component: PostsComponent },
   ]
  },

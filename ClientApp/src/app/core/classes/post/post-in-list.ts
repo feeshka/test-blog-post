@@ -1,9 +1,9 @@
 export class PostInList{
-	Id: number = 0;
-	OwnerUserId: string = '';
-	OwnerName: string = '';
-	PostName: string = '';
-	PostShortComment: string = '';
-	PostCreationDate: string = '';
-	PostRating: number = 0;
+	id: number = 0;
+	ownerUserId: string = '';
+	ownerName: string = '';
+	postName: string = '';
+	postShortComment: string = '';
+	postCreationDate: string = '';
+	postRating: number = 0;
 }

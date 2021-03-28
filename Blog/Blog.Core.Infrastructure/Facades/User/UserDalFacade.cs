@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blog.Core.Infrastructure.Facades.User
+namespace Blog.Core.Infrastructure
 {
 	public class UserDalFacade : IUserDalFacade
 	{
@@ -55,7 +55,9 @@ namespace Blog.Core.Infrastructure.Facades.User
 
 		public async Task<IEnumerable<BlogInListDto>> GetCurrentUserBlogsAsync( string id )
 		{
-			return await _context.Blogs.Where(x=> x.UserId == id)
+			return await _context.Blogs
+				.Include(x=> x.Posts)
+				.Where(x=> x.UserId == id)
 				.Select( x => _mapper.Map<BlogInListDto>( x ) )
 				.ToListAsync();
 		}

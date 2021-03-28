@@ -1,9 +1,9 @@
 export class Post{
-	OwnerUserId: string = '';
-	OwnerName: string = '';
-	PostName: string = '';
-	PostComment: string = '';
-	PostCreationDate: string = '';
-	PostsCount: number = 0;
-	PostRating: number = 0;
+	ownerUserId: string = '';
+	ownerName: string = '';
+	postName: string = '';
+	postComment: string = '';
+	postCreationDate: string = '';
+	postsCount: number = 0;
+	postRating: number = 0;
 }

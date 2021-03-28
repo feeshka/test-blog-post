@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserLogin } from '../core/classes/user/user-login';
@@ -20,11 +20,11 @@ export class UserService {
   }
 
   getDashboardInfo(){
-    return this.http.get("https://localhost:44343/api/user/dashboard");
+    return this.http.get("https://localhost:44343/api/user/dashboard", {params: {userId: <string>localStorage.getItem('UserId')}});
   }
 
   getCurrentUserBlogs(){
-    return this.http.get("https://localhost:44343/api/user/dashboard/current-user-blogs");
+    return this.http.get("https://localhost:44343/api/user/dashboard/current-user-blog", {params: {userId: <string>localStorage.getItem('UserId')}});
   }
 
   getCurrentUserPosts(){

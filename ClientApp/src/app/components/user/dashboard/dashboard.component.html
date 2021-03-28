@@ -4,15 +4,27 @@
         <button type="submit" class="btn btn-primary m-2" (click)="(newPost())">Новый пост</button>
     </div>
     <div class="wrapper-div">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+              Информация о пользователе
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Логин: {{UserInfo.userName}}</li>
+              <li class="list-group-item">Имя: {{UserInfo.fullName}}</li>
+              <li class="list-group-item">Email: {{UserInfo.email}}</li>
+            </ul>
+          </div>
+    </div>
+    <div class="wrapper-div mt-2">
         <div class="">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink='/dashboard/posts'
-                        routerLinkActive='active'>Посты</a>
+                    <a class="nav-link active" aria-current="page" routerLink='/dashboard'
+                        routerLinkActive='active'>Блоги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink='/dashboard/blogs'
-                        routerLinkActive='active'>Блоги</a>
+                    <a class="nav-link" aria-current="page" routerLink='/dashboard/posts'
+                        routerLinkActive='active'>Посты</a>
                 </li>
             </ul>
         </div>

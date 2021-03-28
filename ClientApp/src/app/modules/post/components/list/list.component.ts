@@ -31,30 +31,30 @@ export class ListComponent implements OnInit {
 
   getPosts(){
     let filter: PostFilter = {
-      PostName: this.filterFormModel.value.PostName,
-      RatingFrom: this.filterFormModel.value.RatingFrom,
-      RatingTo: this.filterFormModel.value.RatingTo,
-      DateFrom: '',
-      DateTo: ''
+      postName: this.filterFormModel.value.PostName,
+      ratingFrom: this.filterFormModel.value.RatingFrom,
+      ratingTo: this.filterFormModel.value.RatingTo,
+      dateFrom: '',
+      dateTo: ''
     }
     this._posts = [
       {
-	    Id: 0,
-      OwnerUserId: '0000',
-      OwnerName: 'OwnerName',
-      PostName: 'PostName',
-      PostShortComment: 'PostShortComment',
-      PostCreationDate: '03-01-2020',
-      PostRating: 2,
+	    id: 0,
+      ownerUserId: '0000',
+      ownerName: 'OwnerName',
+      postName: 'PostName',
+      postShortComment: 'PostShortComment',
+      postCreationDate: '03-01-2020',
+      postRating: 2,
     },
     {
-	    Id: 1,
-      OwnerUserId: '0000',
-      OwnerName: 'OwnerName2',
-      PostName: 'PostName2',
-      PostShortComment: 'PostShortComment2',
-      PostCreationDate: '03-01-2020',
-      PostRating: 2,
+	    id: 1,
+      ownerUserId: '0000',
+      ownerName: 'OwnerName2',
+      postName: 'PostName2',
+      postShortComment: 'PostShortComment2',
+      postCreationDate: '03-01-2020',
+      postRating: 2,
     }]
     //return this._postSrv.getPosts(filter);
   }

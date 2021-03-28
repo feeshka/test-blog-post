@@ -22,22 +22,22 @@ export class TopPostsComponent implements OnInit {
   getTopPosts(){
     this._topPosts = [
       {
-	    Id: 0,
-      OwnerUserId: '0000',
-      OwnerName: 'OwnerName',
-      PostName: 'PostName',
-      PostShortComment: 'PostShortComment',
-      PostCreationDate: '03-01-2020',
-      PostRating: 2,
+	    id: 0,
+      ownerUserId: '0000',
+      ownerName: 'OwnerName',
+      postName: 'PostName',
+      postShortComment: 'PostShortComment',
+      postCreationDate: '03-01-2020',
+      postRating: 2,
     },
     {
-	    Id: 1,
-      OwnerUserId: '0000',
-      OwnerName: 'OwnerName2',
-      PostName: 'PostName2',
-      PostShortComment: 'PostShortComment2',
-      PostCreationDate: '03-01-2020',
-      PostRating: 2,
+	    id: 1,
+      ownerUserId: '0000',
+      ownerName: 'OwnerName2',
+      postName: 'PostName2',
+      postShortComment: 'PostShortComment2',
+      postCreationDate: '03-01-2020',
+      postRating: 2,
     }]
     //return this._homeSrv.getTopPosts(10);
   }

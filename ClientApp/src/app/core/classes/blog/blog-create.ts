@@ -1,5 +1,5 @@
 export class BlogCreate{
-	BlogName: string = '';
-	BlogComment: string = '';
-	UserId: string = '';
+	blogName: string = '';
+	blogComment: string = '';
+	userId: string = '';
 }

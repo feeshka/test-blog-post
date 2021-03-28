@@ -9,6 +9,6 @@ namespace Blog.Core
 		public string BlogComment { get; set; }
 		public double Rating { get; set; }
 		public string BlogName { get; set; }
-		public string OwnerUserId { get; set; }
+		public string UserId { get; set; }
 	}
 }

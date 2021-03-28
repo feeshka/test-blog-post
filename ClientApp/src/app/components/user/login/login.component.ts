@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   });
 
   onSubmit(){
+    localStorage.clear();
     let user: UserLogin = {
       Email: this.loginFormModel.value.Email,
       Password: this.loginFormModel.value.Password
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
         console.log(result);
         if(result.success == true){
           localStorage.setItem("token", result.token);
-          localStorage.setItem("token", result.UserId);
+          localStorage.setItem("UserId", result.userId);
           this._router.navigateByUrl('/home')
           this._toastr.success("Вход выполнен!", "Успешно")
         }
