@@ -65,7 +65,7 @@ export class CreateComponent implements OnInit {
       postName: this.createNewFormModel.value.PostName,
       postComment: this.createNewFormModel.value.PostContent,
       blogId: this._blogId,
-      userId: <string>localStorage.getItem("UserId")
+      ownerUserId: <string>localStorage.getItem("UserId")
     }
     this._postSrv.updatePost(postEdit)
     .subscribe((result: any) => {
@@ -83,7 +83,7 @@ export class CreateComponent implements OnInit {
       postName: this.createNewFormModel.value.PostName,
       postComment: this.createNewFormModel.value.PostContent,
       blogId: <string>this.createNewFormModel.value.BlogId,
-      userId: <string>localStorage.getItem("UserId")
+      ownerUserId: <string>localStorage.getItem("UserId")
     }
 
     console.log(postNew);

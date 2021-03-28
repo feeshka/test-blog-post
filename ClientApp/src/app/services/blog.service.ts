@@ -19,8 +19,12 @@ export class BlogService {
     return this._http.post("https://localhost:44343/api/blog/update", updated);
   }
 
-  getPostById(id: string) {
+  getBlogById(id: string) {
     return this._http.get("https://localhost:44343/api/blog/get-blog", {params: {id: id}});
+  }
+
+  getBlogPosts(id: string) {
+    return this._http.get("https://localhost:44343/api/blog/get-blog-posts", {params: {id: id}});
   }
 
   getAll(filter: BlogFilter) {

@@ -37,6 +37,14 @@ namespace Blog.Api.Controllers
 			return Json( result );
 		}
 
+		[HttpGet]
+		[Route( "get-blog-posts" )]
+		public async Task<IActionResult> GetPostsForBlog( [FromQuery] long id )
+		{
+			var result = await _blogService.GetPostsForBlog( id );
+			return Json( result );
+		}
+
 		[HttpPost]
 		[Route("new-blog")]
 		[Authorize]

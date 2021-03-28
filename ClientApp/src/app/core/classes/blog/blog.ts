@@ -1,9 +1,8 @@
 export class Blog{
-	ownerUserId: string = '';
-	ownerName: string = '';
-	blogName: string = '';
-	blogComment: string = '';
-	blogCreationDate: string = '';
+	name: string = '';
+	comment: string = '';
+	creationDate: string = '';
+	ownerUserName: string = '';
 	postsCount: number = 0;
-	blogRating: number = 0;
+	rating: number = 0;
 }

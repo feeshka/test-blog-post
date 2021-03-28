@@ -1,1 +1,29 @@
-<p>work</p>
+<div class="wrapper-div">
+    <h3 class="">{{Blog.name}}</h3>
+</div>
+<div class="wrapper-div mt-4">
+    <div>{{Blog.comment}}</div>
+</div>
+<div class="wrapper-div mt-4">
+    <div class="card-text">Дата: {{Blog.creationDate}}</div>
+    <div class="card-text">Постов: {{Blog.postsCount}}</div>
+    <div class="card-text">Создатель: {{Blog.ownerUserName}}</div>
+    <div class="card-text">Рейтинг: {{Blog.rating}}</div>
+    <ngb-rating [(rate)]="Blog.rating" [readonly]="true" [max]=5></ngb-rating>
+</div>
+<div class="wrapper-div p4">
+    <h3>Посты:</h3>
+</div>
+<div class="card m-2" *ngFor="let post of Posts">
+    <h6 class="card-header text-muted">{{post.ownerName}}</h6>
+    <div class="card-body">
+        <h5 class="card-title">{{post.postName}}</h5>
+        <p class="card-text">{{post.postShortComment}}</p>
+        <a href="{{'post/view/'+ post.id}}" class="btn btn-info btn-sm w-auto">Читать</a>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="card-text">Дата: {{post.postCreationDate}}</div>
+        <div class="card-text">Рейтинг: {{post.postRating}}</div>
+        <ngb-rating [(rate)]="post.postRating" [readonly]="true" [max]=5></ngb-rating>
+    </div>
+</div>

@@ -55,9 +55,9 @@ namespace Blog.Core.Infrastructure
 			{
 				return await _context.Posts
 							.Include( x => x.CreatorUser )
-							.Where( x => filter.CreationFrom.HasValue && x.CreationDate >= filter.CreationFrom )
-							.Where( x => filter.CreationTo.HasValue && x.CreationDate <= filter.CreationTo )
-							.Where( x => !String.IsNullOrEmpty( filter.PostName ) && x.Name.Contains( filter.PostName ) )
+							.WhereIf( filter.CreationFrom.HasValue, x => x.CreationDate >= filter.CreationFrom )
+							.WhereIf( filter.CreationTo.HasValue, x => x.CreationDate <= filter.CreationTo )
+							.WhereIf( !String.IsNullOrEmpty( filter.PostName ), x => x.Name.Contains( filter.PostName ) )
 							.Select( x => _mapper.Map<PostInListDto>( x ) )
 							.ToListAsync();
 			}

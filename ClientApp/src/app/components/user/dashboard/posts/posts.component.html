@@ -1,1 +1,12 @@
-<p>posts works!</p>
+<div class="card m-2" *ngFor="let post of Posts">
+    <div class="card-body">
+        <h5 class="card-title">{{post.postName}}</h5>
+        <p class="card-text">{{post.postShortComment}}</p>
+        <a href="{{'/post/view/'+ post.id}}" class="btn btn-info btn-sm w-auto m-2">Читать</a>
+    </div>
+    <div class="card-footer text-muted">
+        <div class="card-text">Дата: {{post.postCreationDate}}</div>
+        <div class="card-text">Рейтинг: {{post.postRating}}</div>
+        <ngb-rating [(rate)]="post.postRating" [readonly]="true" [max]=5></ngb-rating>
+    </div>
+</div>

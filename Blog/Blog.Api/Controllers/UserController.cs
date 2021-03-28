@@ -30,10 +30,19 @@ namespace Blog.Api.Controllers
 
 		[HttpGet]
 		[Authorize]
-		[Route( "Dashboard/current-user-blog" )]
+		[Route( "Dashboard/current-user-blogs" )]
 		public async Task<IActionResult> GetCurrentUserBlogs([FromQuery] string userId)
 		{
 			var result = await _userService.GetCurrentUserBlogsAsync( userId );
+			return Json( result );
+		}
+
+		[HttpGet]
+		[Authorize]
+		[Route( "Dashboard/current-user-posts" )]
+		public async Task<IActionResult> GetCurrentUserPosts( [FromQuery] string userId )
+		{
+			var result = await _userService.GetCurrentUserPostsAsync( userId );
 			return Json( result );
 		}
 	}

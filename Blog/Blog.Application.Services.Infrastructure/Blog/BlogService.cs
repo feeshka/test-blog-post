@@ -74,5 +74,17 @@ namespace Blog.Application.Services.Infrastructure
 				throw new Exception( ex.Message );
 			}
 		}
+
+		public async Task<IEnumerable<PostInListDto>> GetPostsForBlog( long postId )
+		{
+			try
+			{
+				return await _blogDalFacade.GetPostsForBlog( postId );
+			}
+			catch ( Exception ex )
+			{
+				throw new Exception( ex.Message );
+			}
+		}
 	}
 }

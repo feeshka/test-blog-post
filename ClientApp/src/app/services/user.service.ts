@@ -24,11 +24,11 @@ export class UserService {
   }
 
   getCurrentUserBlogs() {
-    return this.http.get("https://localhost:44343/api/user/dashboard/current-user-blog", { params: { userId: <string>localStorage.getItem('UserId') } });
+    return this.http.get("https://localhost:44343/api/user/dashboard/current-user-blogs", { params: { userId: <string>localStorage.getItem('UserId') } });
   }
 
   getCurrentUserPosts() {
-    return this.http.get("https://localhost:44343/api/user/dashboard/current-user-posts");
+    return this.http.get("https://localhost:44343/api/user/dashboard/current-user-posts", { params: { userId: <string>localStorage.getItem('UserId') } });
   }
 
   userLoggedIn() {

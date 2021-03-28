@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Blog.Core.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210327133839_FixTables")]
-    partial class FixTables
+    [Migration("20210328192007_Inint")]
+    partial class Inint
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,14 +40,43 @@ namespace Blog.Core.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<long?>("RatingId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RatingId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("AppBlogs");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.BlogRating", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsersCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppBlogsRatings");
                 });
 
             modelBuilder.Entity("Blog.Core.Models.BlogTag", b =>
@@ -77,6 +106,132 @@ namespace Blog.Core.Infrastructure.Migrations
                     b.HasIndex("BlogEntityId");
 
                     b.ToTable("AppBlogTags");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.Comment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<long>("ParentCommentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PostId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AppComments");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.Post", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<long>("BlogId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<long?>("RatingId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.HasIndex("CreatorUserId");
+
+                    b.HasIndex("RatingId");
+
+                    b.ToTable("AppPosts");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.PostTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<long?>("PostId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("AppPostTags");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.PostsRating", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsersCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppPostsRatings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -303,9 +458,15 @@ namespace Blog.Core.Infrastructure.Migrations
 
             modelBuilder.Entity("Blog.Core.Models.BlogEntity", b =>
                 {
+                    b.HasOne("Blog.Core.Models.BlogRating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId");
+
                     b.HasOne("Blog.Core.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Rating");
 
                     b.Navigation("User");
                 });
@@ -315,6 +476,51 @@ namespace Blog.Core.Infrastructure.Migrations
                     b.HasOne("Blog.Core.Models.BlogEntity", null)
                         .WithMany("Tags")
                         .HasForeignKey("BlogEntityId");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.Comment", b =>
+                {
+                    b.HasOne("Blog.Core.Models.Post", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Blog.Core.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.Post", b =>
+                {
+                    b.HasOne("Blog.Core.Models.BlogEntity", "Blog")
+                        .WithMany("Posts")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Blog.Core.Models.User", "CreatorUser")
+                        .WithMany()
+                        .HasForeignKey("CreatorUserId");
+
+                    b.HasOne("Blog.Core.Models.PostsRating", "Rating")
+                        .WithMany()
+                        .HasForeignKey("RatingId");
+
+                    b.Navigation("Blog");
+
+                    b.Navigation("CreatorUser");
+
+                    b.Navigation("Rating");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.PostTag", b =>
+                {
+                    b.HasOne("Blog.Core.Models.Post", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -370,6 +576,15 @@ namespace Blog.Core.Infrastructure.Migrations
 
             modelBuilder.Entity("Blog.Core.Models.BlogEntity", b =>
                 {
+                    b.Navigation("Posts");
+
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("Blog.Core.Models.Post", b =>
+                {
+                    b.Navigation("Comments");
+
                     b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618

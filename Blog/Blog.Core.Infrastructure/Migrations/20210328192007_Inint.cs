@@ -4,10 +4,42 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Blog.Core.Infrastructure.Migrations
 {
-    public partial class Init : Migration
+    public partial class Inint : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AppBlogsRatings",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsersCount = table.Column<int>(type: "integer", nullable: false),
+                    Stars = table.Column<int>(type: "integer", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Deleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppBlogsRatings", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppPostsRatings",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsersCount = table.Column<int>(type: "integer", nullable: false),
+                    Stars = table.Column<int>(type: "integer", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Deleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppPostsRatings", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -81,8 +113,9 @@ namespace Blog.Core.Infrastructure.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    UserId1 = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: true),
+                    Comment = table.Column<string>(type: "text", nullable: true),
+                    RatingId = table.Column<long>(type: "bigint", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Deleted = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -90,8 +123,14 @@ namespace Blog.Core.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_AppBlogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AppBlogs_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_AppBlogs_AppBlogsRatings_RatingId",
+                        column: x => x.RatingId,
+                        principalTable: "AppBlogsRatings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AppBlogs_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -189,7 +228,7 @@ namespace Blog.Core.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    CreatorUserId = table.Column<int>(type: "integer", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "text", nullable: true),
                     BlogEntityId = table.Column<long>(type: "bigint", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Deleted = table.Column<bool>(type: "boolean", nullable: false)
@@ -205,15 +244,140 @@ namespace Blog.Core.Infrastructure.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AppPosts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
+                    BlogId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "text", nullable: true),
+                    RatingId = table.Column<long>(type: "bigint", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Deleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppPosts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppPosts_AppBlogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "AppBlogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppPosts_AppPostsRatings_RatingId",
+                        column: x => x.RatingId,
+                        principalTable: "AppPostsRatings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AppPosts_AspNetUsers_CreatorUserId",
+                        column: x => x.CreatorUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppComments",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Content = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: true),
+                    ParentCommentId = table.Column<long>(type: "bigint", nullable: false),
+                    PostId = table.Column<long>(type: "bigint", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Deleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppComments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppComments_AppPosts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "AppPosts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppComments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppPostTags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    CreatorUserId = table.Column<string>(type: "text", nullable: true),
+                    PostId = table.Column<long>(type: "bigint", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Deleted = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppPostTags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppPostTags_AppPosts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "AppPosts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_AppBlogs_UserId1",
+                name: "IX_AppBlogs_RatingId",
                 table: "AppBlogs",
-                column: "UserId1");
+                column: "RatingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppBlogs_UserId",
+                table: "AppBlogs",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppBlogTags_BlogEntityId",
                 table: "AppBlogTags",
                 column: "BlogEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppComments_PostId",
+                table: "AppComments",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppComments_UserId",
+                table: "AppComments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppPosts_BlogId",
+                table: "AppPosts",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppPosts_CreatorUserId",
+                table: "AppPosts",
+                column: "CreatorUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppPosts_RatingId",
+                table: "AppPosts",
+                column: "RatingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppPostTags_PostId",
+                table: "AppPostTags",
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -259,6 +423,12 @@ namespace Blog.Core.Infrastructure.Migrations
                 name: "AppBlogTags");
 
             migrationBuilder.DropTable(
+                name: "AppComments");
+
+            migrationBuilder.DropTable(
+                name: "AppPostTags");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -274,10 +444,19 @@ namespace Blog.Core.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AppBlogs");
+                name: "AppPosts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "AppBlogs");
+
+            migrationBuilder.DropTable(
+                name: "AppPostsRatings");
+
+            migrationBuilder.DropTable(
+                name: "AppBlogsRatings");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

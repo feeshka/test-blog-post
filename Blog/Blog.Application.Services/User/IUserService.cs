@@ -10,6 +10,7 @@ namespace Blog.Application.Services
 	{
 		Task<UserProfileDto> GetProfileByUserIdAsync( string id );
 		Task<IEnumerable<BlogInListDto>> GetCurrentUserBlogsAsync( string id );
+		Task<IEnumerable<PostInListDto>> GetCurrentUserPostsAsync( string id );
 
 	}
 }

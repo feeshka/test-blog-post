@@ -21,8 +21,11 @@ namespace Library.Dal.Infrastructure
 			#region Blog
 
 			CreateMap<BlogEntity, BlogDto>()
-				.ForMember( e => e.CreationDate, options => options.MapFrom( x => x.CreationDate.ToString( "dd-MM-yyyy" ) ) );
-
+				.ForMember( e => e.CreationDate, options => options.MapFrom( x => x.CreationDate.ToString( "dd-MM-yyyy" ) ) )
+				.ForMember( e => e.Rating, options => options.MapFrom( x => x.Rating.Stars ) )
+				.ForMember( e => e.OwnerUserName, options => options.MapFrom( x => x.User.UserName ) )
+				.ForMember( e => e.PostsCount, options => options.MapFrom( x => x.Posts.Count ) )
+				.ForMember( e => e.OwnerUserId, options => options.MapFrom( x => x.User.Id ) );
 
 			CreateMap<BlogDto, BlogEntity>()
 				.ForMember( e => e.Id, options => options.Ignore() )
@@ -35,7 +38,8 @@ namespace Library.Dal.Infrastructure
 				.ForMember( e => e.Id, options => options.Ignore() )
 				.ForMember( e => e.Name, options => options.MapFrom( x => x.BlogName ) )
 				.ForMember( e => e.Comment, options => options.MapFrom( x => x.BlogComment ) )
-				.AfterMap( ( s, d ) => d.CreationDate = DateTime.UtcNow );
+				.AfterMap( ( s, d ) => d.CreationDate = DateTime.UtcNow )
+				.AfterMap( ( s, d ) => d.Rating = new BlogRating() );
 
 			CreateMap<BlogEntity, BlogInListDto>()
 				.ForMember( e => e.BlogName, options => options.MapFrom( x => x.Name ) )
@@ -62,6 +66,8 @@ namespace Library.Dal.Infrastructure
 				.ForMember( e => e.Id, options => options.Ignore() )
 				.ForMember( e => e.Name, options => options.MapFrom( x => x.PostName ) )
 				.ForMember( e => e.Content, options => options.MapFrom( x => x.PostComment ) )
+				.ForMember( e => e.CreatorUserId, options => options.MapFrom( x => x.OwnerUserId ) )
+				.AfterMap( ( s, d ) => d.Rating = new PostsRating() )
 				.AfterMap( ( s, d ) => d.CreationDate = DateTime.UtcNow );
 
 			CreateMap<Post, PostInListDto>()

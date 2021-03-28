@@ -61,5 +61,13 @@ namespace Blog.Core.Infrastructure
 				.Select( x => _mapper.Map<BlogInListDto>( x ) )
 				.ToListAsync();
 		}
+
+		public async Task<IEnumerable<PostInListDto>> GetCurrentUserPostsAsync( string id )
+		{
+			return await _context.Posts
+				.Where( x => x.CreatorUserId == id )
+				.Select( x => _mapper.Map<PostInListDto>( x ) )
+				.ToListAsync();
+		}
 	}
 }

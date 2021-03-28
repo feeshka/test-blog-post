@@ -49,10 +49,11 @@ namespace Blog.Core.Infrastructure
 			{
 				return await _context.Blogs
 							.Include(x=> x.User)
-							.Where(x => filter.CreationFrom.HasValue && x.CreationDate >= filter.CreationFrom)
-							.Where(x => filter.CreationTo.HasValue && x.CreationDate <= filter.CreationTo)
-							.Where(x => !String.IsNullOrEmpty(filter.BlogName) && x.Name.Contains(filter.BlogName))
-							//.Where(x => !String.IsNullOrEmpty(filter.OwnerName) && x.User.Name.Contains(filter.OwnerName))
+							.Include( x => x.Rating )
+							.Include( x => x.Posts )
+							.WhereIf( filter.CreationFrom.HasValue, x => x.CreationDate >= filter.CreationFrom)
+							.WhereIf( filter.CreationTo.HasValue, x => x.CreationDate <= filter.CreationTo)
+							.WhereIf( !String.IsNullOrEmpty( filter.BlogName ), x => x.Name.Contains(filter.BlogName))
 							.Select(x => _mapper.Map<BlogInListDto>(x))
 							.ToListAsync();
 			}
@@ -66,7 +67,11 @@ namespace Blog.Core.Infrastructure
 		{
 			try
 			{
-				var entity = await _context.Blogs.Where(x => x.Id == id).FirstOrDefaultAsync();
+				var entity = await _context.Blogs
+							.Include( x => x.Rating )
+							.Include(x=> x.User)
+							.Include( x => x.Posts )
+							.Where(x => x.Id == id).FirstOrDefaultAsync();
 
 				if (entity == null)
 					throw new Exception($"Blog #{id} not found!");
@@ -111,6 +116,21 @@ namespace Blog.Core.Infrastructure
 			catch (Exception ex)
 			{
 				throw new Exception(ex.Message);
+			}
+		}
+
+		public async Task<IEnumerable<PostInListDto>> GetPostsForBlog( long postId )
+		{
+			try
+			{
+				return await _context.Posts
+					.Where( x => x.BlogId == postId )
+					.Select(x=> _mapper.Map<PostInListDto>(x) )
+					.ToListAsync();
+			}
+			catch ( Exception ex )
+			{
+				throw new Exception( ex.Message );
 			}
 		}
 	}

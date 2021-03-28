@@ -30,6 +30,7 @@ namespace Blog.Api.Controllers
 
 		[HttpPost]
 		[Route( "list" )]
+
 		public async Task<IActionResult> GetAll( [FromBody] PostSearchInput input)
 		{
 			var result = await _postService.GetAllAsync( input );

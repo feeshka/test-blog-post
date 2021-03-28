@@ -1,1 +1,52 @@
-<p>list works!</p>
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <form class="form-inline" [formGroup]="filterFormModel" autocomplete="off" (ngSubmit)=(getBlogs())>
+                <input type="text" formControlName="PostName"
+                    class="form-control m-2 w-auto d-inline-block text-muted" placeholder="Название">
+                <input type="text" formControlName="AuthorName"
+                    class="form-control m-2 w-auto d-inline-block text-muted" placeholder="Автор">
+                <label class="m-2">Рейтинг:</label>
+                <select formControlName="RatingFrom" placeholder="От"
+                    class="form-control m-2 w-auto d-inline-block text-muted">
+                    <option value=""></option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label>-</label>
+                <select formControlName="RatingTo" placeholder="До"
+                    class="form-control m-2 w-auto d-inline-block text-muted">
+                    <option value=""></option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div class="form-group d-inline-block m-2">
+                    <button type="submit" class="btn btn-danger mb-2 w-auto">Искать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="card m-2" *ngFor="let blog of Blogs">
+        <div class="card-body">
+            <h5 class="card-title">{{blog.blogName}}</h5>
+            <p class="card-text">{{blog.blogShortComment}}</p>
+            <a href="{{'/blog/view/'+ blog.id}}" class="btn btn-info btn-sm w-auto m-2">Подробнее</a>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="card-text">Дата: {{blog.blogCreationDate}}</div>
+            <div class="card-text">Постов: {{blog.postsCount}}</div>
+            <div class="card-text">Рейтинг: {{blog.blogRating}}</div>
+            <ngb-rating [(rate)]="blog.blogRating" [readonly]="true" [max]=5></ngb-rating>
+        </div>
+    </div>
+</div>

@@ -23,5 +23,10 @@ namespace Blog.Application.Services.Infrastructure
 		{
 			return await _userDalFacade.GetCurrentUserBlogsAsync( id );
 		}
+
+		public async Task<IEnumerable<PostInListDto>> GetCurrentUserPostsAsync( string id )
+		{
+			return await _userDalFacade.GetCurrentUserPostsAsync( id );
+		}
 	}
 }
