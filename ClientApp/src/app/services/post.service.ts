@@ -11,22 +11,22 @@ export class PostService {
   constructor(private _http: HttpClient) { }
 
   getBlogsForSelect() {
-    return this._http.get("https://localhost:44343/api/post/get-blog-select-options", {params: {userId: <string>localStorage.getItem('UserId')}});
+    return this._http.get("http://localhost:5000/api/post/get-blog-select-options", {params: {userId: <string>localStorage.getItem('UserId')}});
   }
 
   getPostById(id: string) {
-    return this._http.get("https://localhost:44343/api/post/get-post", {params: {id: id}});
+    return this._http.get("http://localhost:5000/api/post/get-post", {params: {id: id}});
   }
 
   getAll(filter: PostFilter) {
-    return this._http.post("https://localhost:44343/api/post/list", filter);
+    return this._http.post("http://localhost:5000/api/post/list", filter);
   }
 
   createNewPost(newPost: PostCreate) {
-    return this._http.post("https://localhost:44343/api/post/create", newPost);
+    return this._http.post("http://localhost:5000/api/post/create", newPost);
   }
 
   updatePost(updated: PostCreate) {
-    return this._http.post("https://localhost:44343/api/post/update", updated);
+    return this._http.post("http://localhost:5000/api/post/update", updated);
   }
 }

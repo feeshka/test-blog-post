@@ -36,6 +36,7 @@ namespace Blog.Api
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices( IServiceCollection services )
 		{
+			var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 			services.Configure<ApplicationSettings>( Configuration.GetSection( "ApplicationSettings" ) );
 			services.AddControllers();
 			services.AddCors();
@@ -54,7 +55,7 @@ namespace Blog.Api
 			#endregion
 
 			services.AddDbContext<ApplicationDbContext>( options =>
-				 options.UseNpgsql( Configuration.GetConnectionString( "DefaultConnection" ) )
+				 options.UseNpgsql(connectionString)
 			);
 
 			services.AddDefaultIdentity<User>()
@@ -106,7 +107,6 @@ namespace Blog.Api
 						 .AllowAnyHeader()
 						 .AllowAnyMethod();
 			 } );
-			app.UseHttpsRedirection();
 
 			app.UseRouting();
 

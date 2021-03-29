@@ -12,22 +12,22 @@ export class BlogService {
   constructor(private _http: HttpClient) { }
 
   createNewBlog(newBlog: BlogCreate) {
-    return this._http.post("https://localhost:44343/api/blog/new-blog", newBlog);
+    return this._http.post("http://localhost:5000/api/blog/new-blog", newBlog);
   }
 
   updateBlog(updated: BlogCreate) {
-    return this._http.post("https://localhost:44343/api/blog/update", updated);
+    return this._http.post("http://localhost:5000/api/blog/update", updated);
   }
 
   getBlogById(id: string) {
-    return this._http.get("https://localhost:44343/api/blog/get-blog", {params: {id: id}});
+    return this._http.get("http://localhost:5000/api/blog/get-blog", {params: {id: id}});
   }
 
   getBlogPosts(id: string) {
-    return this._http.get("https://localhost:44343/api/blog/get-blog-posts", {params: {id: id}});
+    return this._http.get("http://localhost:5000/api/blog/get-blog-posts", {params: {id: id}});
   }
 
   getAll(filter: BlogFilter) {
-    return this._http.post("https://localhost:44343/api/blog/list", filter);
+    return this._http.post("http://localhost:5000/api/blog/list", filter);
   }
 }

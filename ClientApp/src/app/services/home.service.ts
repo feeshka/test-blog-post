@@ -9,10 +9,10 @@ export class HomeService {
   constructor(private _http: HttpClient) { }
 
   getTopBlogs(count: string){
-    return this._http.get("https://localhost:44343/api/home/top-blogs", {params: {count: count}});
+    return this._http.get("http://localhost:5000/api/home/top-blogs", {params: {count: count}});
   }
 
   getTopPosts(count: string){
-    return this._http.get("https://localhost:44343/api/home/top-posts", {params: {count: count}});
+    return this._http.get("http://localhost:5000/api/home/top-posts", {params: {count: count}});
   }
 }
