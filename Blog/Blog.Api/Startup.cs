@@ -101,14 +101,12 @@ namespace Blog.Api
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.UseRouting();
+
 			app.UseCors( builder =>
 			 {
-				 builder.WithOrigins( Configuration["ApplicationSettings:ClientUrl"].ToString() )
-						 .AllowAnyHeader()
-						 .AllowAnyMethod();
+				 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 			 } );
-
-			app.UseRouting();
 
 			app.UseAuthentication();
 			app.UseAuthorization();
