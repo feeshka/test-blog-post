@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
+import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 import { BlogsComponent } from './components/user/dashboard/blogs/blogs.component';
 import { DashboardComponent } from './components/user/dashboard/dashboard.component';
 import { PostsComponent } from './components/user/dashboard/posts/posts.component';
@@ -17,15 +18,17 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
     ]
   },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
-  children: [
-    { path: '', component: BlogsComponent },
-    { path: 'posts', component: PostsComponent },
-  ]
- },
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+    children: [
+      { path: '', component: BlogsComponent },
+      { path: 'posts', component: PostsComponent },
+    ]
+  },
   { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
   { path: 'blog', loadChildren: () => import('./modules/blog/blog.module').then(m => m.BlogModule) },
   { path: 'post', loadChildren: () => import('./modules/post/post.module').then(m => m.PostModule) },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

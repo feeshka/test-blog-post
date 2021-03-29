@@ -17,6 +17,7 @@ import { DashboardComponent } from './components/user/dashboard/dashboard.compon
 import { PostsComponent } from './components/user/dashboard/posts/posts.component';
 import { BlogsComponent } from './components/user/dashboard/blogs/blogs.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     LoginComponent,
     DashboardComponent,
     PostsComponent,
-    BlogsComponent
+    BlogsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
