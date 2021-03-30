@@ -1,0 +1,23 @@
+version: '3'
+services:
+    db:
+        image: feeshka/db:v1
+        container_name: postgres
+        ports:
+            - 5432:5432
+        volumes:
+            - ./pf_data:/var/lib/postgresql/data/pgdata
+        environment:
+            POSTGRES_PASSWORD: 1
+            PGDATA: var/lib/postgresql/data/pgdata
+        restart: always
+    api:
+        image: feeshka/api-nw
+        container_name: api-nw
+        ports:
+            - 5000:80
+        environment:
+            DB_CONNECTION_STRING: "host=db;Database=postgres;User Id=postgres;Password=1;"
+        restart: always
+        links:
+            - db
